@@ -162,7 +162,9 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         
         ////software
+    	
     	mCount++;
+    	
     	if(mCount>27 && mCount<457){
 	    	if(mCount%14==0){
 	    		if(reconocerp(0,inputFrame.gray())){

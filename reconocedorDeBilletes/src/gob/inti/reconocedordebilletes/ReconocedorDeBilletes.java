@@ -103,6 +103,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     {
         super.onPause();
         if (mOpenCvCameraView != null)
+        	
             mOpenCvCameraView.disableView();
     }
 
@@ -393,7 +394,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 		    		distancia_AB > 100 && distancia_AC > 120 && distancia_AD > 50
 		    		){
 		    					
-		    				SaveImage(img_matches, "verdadero");
+		    				SaveImage(img_matches, "verdaderos");
 		    				scene_gray.release();
 		    		    	template.release();
 		    		    	template_gray.release();
@@ -404,7 +405,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 		    	
 		    }
 		    
-		    SaveImage(img_matches, "falso");
+		    SaveImage(img_matches, "falsos");
 		    
 		    scene_gray.release();
 	    	template.release();

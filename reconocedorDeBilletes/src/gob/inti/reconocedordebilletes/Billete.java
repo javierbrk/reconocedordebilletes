@@ -9,7 +9,7 @@ import android.media.MediaPlayer;
  *
  */
 public class Billete {
-	private Tempĺate bTemplate;
+	private Template bTemplate;
 	private int audio; // the raw resource id 
 	EDenominacionBilletes denominacion;
 	

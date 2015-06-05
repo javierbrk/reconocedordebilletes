@@ -16,7 +16,6 @@ public enum EDenominacionBilletes {
 	cienpd(11),
 	cienevp(12),
 	cienevpd(13);
-	sindenominacion(14);
 	
 	private int value;
 

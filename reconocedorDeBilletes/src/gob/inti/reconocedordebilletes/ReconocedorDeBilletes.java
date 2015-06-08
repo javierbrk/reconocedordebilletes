@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
@@ -32,6 +33,7 @@ import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -49,12 +51,11 @@ import android.widget.Toast;
 public class ReconocedorDeBilletes extends Activity implements CvCameraViewListener2 {
     private static final String TAG = "OCVSample::Activity";
 
-	
 
     private CameraBridgeViewBase mOpenCvCameraView;
     private boolean              mIsJavaCamera = true;
     private MenuItem             mItemSwitchCamera = null;
-    
+    private HomographyMatcher    hm;
     private int					mCount=0;
     private MediaPlayer player;
 
@@ -96,9 +97,36 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
 
         mOpenCvCameraView.setCvCameraViewListener(this);
+
     }
 
-    @Override
+    private void cargartemplates() throws NotEnougthKeypoints {
+		// TODO Auto-generated method stub
+    	ArrayList<Billete> lb= new ArrayList<Billete>();
+    	for (EDenominacionBilletes denominacion : EDenominacionBilletes.values()) 
+    	{
+			
+			Billete b = new Billete(); 
+			Mat mask = new Mat(),mask_gray = new Mat();
+			
+			Bitmap bMap0=BitmapFactory.decodeResource(getResources(),templateimg(denominacion.value()));
+			Utils.bitmapToMat(bMap0, b.bTemplate.ImagenOriginal);
+			
+			Bitmap bMap2=BitmapFactory.decodeResource(getResources(),maskimg(denominacion.value()));
+		    Utils.bitmapToMat(bMap2, mask);
+		    Imgproc.cvtColor(mask, mask_gray, Imgproc.COLOR_BGR2GRAY,CvType.CV_8UC1);
+			b.bTemplate.Mascara = mask_gray;
+		    
+			b.audio = sound(denominacion.value());
+			
+			b.denominacion = denominacion;
+			
+			lb.add(b);
+		}
+		hm.ProcesarTemplate(lb);
+	}
+
+	@Override
     public void onPause()
     {
         super.onPause();
@@ -165,261 +193,199 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
         ////software
     	
     	mCount++;
-    	
+    	if(mCount == 5)
+    	{
+	        hm = new HomographyMatcher();
+	        hm.Inicializar(0);
+	        try {
+				cargartemplates();
+			} catch (NotEnougthKeypoints e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
     	if(mCount>27 && mCount<457){
-	    	if(mCount%14==0){
-	    		if(reconocerp(0,inputFrame.gray())){
-	    			playsound(0);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==1){
-	    		if(reconocerp(1,inputFrame.gray())){
-	    			playsound(1);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==2){
-	    		if(reconocerp(2,inputFrame.gray())){
-	    			playsound(2);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==3){
-	    		if(reconocerp(3,inputFrame.gray())){
-	    			playsound(3);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==4){
-	    		if(reconocerp(4,inputFrame.gray())){
-	    			playsound(4);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==5){
-	    		if(reconocerp(5,inputFrame.gray())){
-	    			playsound(5);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==6){
-	    		if(reconocerp(6,inputFrame.gray())){
-	    			playsound(6);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==7){
-	    		if(reconocerp(7,inputFrame.gray())){
-	    			playsound(7);
-	    		}
-	    		    		
-	    	}
-	    	
-	    	if(mCount%14==8){
-	    		if(reconocerp(8,inputFrame.gray())){
-	    			playsound(8);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==9){
-	    		if(reconocerp(9,inputFrame.gray())){
-	    			playsound(9);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==10){
-	    		if(reconocerp(10,inputFrame.gray())){
-	    			playsound(10);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==11){
-	    		if(reconocerp(11,inputFrame.gray())){
-	    			playsound(11);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==12){
-	    		if(reconocerp(12,inputFrame.gray())){
-	    			playsound(12);
-	    		}
-	    		    		
-	    	}
-	    	if(mCount%14==13){
-	    		if(reconocerp(13,inputFrame.gray())){
-	    			playsound(13);
-	    		}
-	    		    		
-	    	}
-	    	
-	    	
+    		List<EscenaProcesada> lesc;
+			try {
+				lesc = hm.ProcesarImagen(inputFrame.rgba());
+				for (EscenaProcesada escenaProcesada : lesc) {
+					if (escenaProcesada.correspondencia)
+					{
+						escenaProcesada.Contraparete.anunciate(this);
+					}
+				}
+			} catch (NotEnougthKeypoints e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+			
 	        return inputFrame.rgba();
     	}else{
     		return inputFrame.gray();
     	}
         
     }
-    private boolean reconocerp(int idpesos, Mat gray) {
-		Mat scene_gray=new Mat(),template= new Mat(),template_gray= new Mat(),mask= new Mat(),mask_gray= new Mat();
-		
-		
-		
-		Bitmap bMap0=BitmapFactory.decodeResource(getResources(),templateimg(idpesos));
-        Utils.bitmapToMat(bMap0, template);
-        Imgproc.cvtColor(template, template_gray, Imgproc.COLOR_BGR2GRAY,CvType.CV_8UC1);
-          
-        Bitmap bMap2=BitmapFactory.decodeResource(getResources(),maskimg(idpesos));
-	    Utils.bitmapToMat(bMap2, mask);
-	    Imgproc.cvtColor(mask, mask_gray, Imgproc.COLOR_BGR2GRAY,CvType.CV_8UC1);
-	    
-	    scene_gray=gray;
-	    
-	    
-	    MatOfKeyPoint keypoints_object = new MatOfKeyPoint();
-	    MatOfKeyPoint keypoints_scene = new MatOfKeyPoint();
-	    Mat descriptors_object = new Mat();
-	    Mat descriptors_scene = new Mat();
-	    
-	    //ORB es el numero 5 para detector de features
-	    FeatureDetector fd = FeatureDetector.create(FeatureDetector.ORB);
-	    
-	    fd.detect(scene_gray, keypoints_scene);
-	    fd.detect(template_gray, keypoints_object,mask_gray);
-	    
-	    
-	    
-	    int cke=keypoints_scene.toList().size(),ckt=keypoints_object.toList().size();
-	    
-	    
-	    	    
-	    if(cke>50 && ckt>50){
-	    	//sigo trabajando
-			    
-		    DescriptorExtractor extractor= DescriptorExtractor.create(DescriptorExtractor.ORB);
-		    
-		    extractor.compute(scene_gray, keypoints_scene, descriptors_scene);
-		    extractor.compute(template_gray, keypoints_object, descriptors_object);
-		
-		    DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
-		    
-		    MatOfDMatch good_matches = new MatOfDMatch();
-		    		    
-		    List<MatOfDMatch> matches=new ArrayList<MatOfDMatch>();
-		    matcher.knnMatch( descriptors_object, descriptors_scene, matches, 2 );
-		    
-		    List<DMatch> goodmatcheslist = new ArrayList<DMatch>();
-		    for (int i = 0; i < matches.size(); ++i)
-		    { 
-		    	if(matches.get(i).toArray().length > 1){
-		    	
-		    		DMatch m1=new DMatch();
-		    		DMatch m2=new DMatch();
-		    		m1=matches.get(i).toArray()[0];
-		    		m2=matches.get(i).toArray()[1];
-				    if(m1.distance>m2.distance*0.6)goodmatcheslist.add(m1);
-		    	}
-		    }
-		    		    		    
-		    good_matches.fromList(goodmatcheslist);
-		   	   	    
-		    Mat img_matches = new Mat();
-		    Features2d.drawMatches(template_gray, keypoints_object,scene_gray, keypoints_scene, good_matches, img_matches);
-			   
-		    LinkedList<Point> objList = new LinkedList<Point>();
-		    LinkedList<Point> sceneList = new LinkedList<Point>();
-		    List<DMatch> good_matches_list = good_matches.toList();
-	
-		    List<KeyPoint> keypoints_objectList = keypoints_object.toList();
-		    List<KeyPoint> keypoints_sceneList = keypoints_scene.toList();
-	
-		    for(int i = 0; i<good_matches_list.size(); i++)
-		    {
-		        objList.addLast(keypoints_objectList.get(good_matches_list.get(i).queryIdx).pt);
-		        sceneList.addLast(keypoints_sceneList.get(good_matches_list.get(i).trainIdx).pt);
-		    }
-	
-		    MatOfPoint2f obj = new MatOfPoint2f();
-		    obj.fromList(objList);
-	
-		    MatOfPoint2f scene = new MatOfPoint2f();
-		    scene.fromList(sceneList);
-	
-		    Mat hg = Calib3d.findHomography(obj, scene, Calib3d.RANSAC, 5);
-	
-		    Mat obj_corners = new Mat(4,1,CvType.CV_32FC2);
-		    Mat scene_corners = new Mat(4,1,CvType.CV_32FC2);
-	
-		    obj_corners.put(0, 0, new double[] {0,0});
-		    obj_corners.put(1, 0, new double[] {template_gray.cols(),0});
-		    obj_corners.put(2, 0, new double[] {template_gray.cols(),template_gray.rows()});
-		    obj_corners.put(3, 0, new double[] {0,template_gray.rows()});
-	
-		    Core.perspectiveTransform(obj_corners,scene_corners, hg);
-		    scene_corners.put(0,0,new double[] {scene_corners.get(0,0)[0]+template_gray.cols(),scene_corners.get(0,0)[1]});
-		    scene_corners.put(1,0,new double[] {scene_corners.get(1,0)[0]+template_gray.cols(),scene_corners.get(1,0)[1]});
-		    scene_corners.put(2,0,new double[] {scene_corners.get(2,0)[0]+template_gray.cols(),scene_corners.get(2,0)[1]});
-		    scene_corners.put(3,0,new double[] {scene_corners.get(3,0)[0]+template_gray.cols(),scene_corners.get(3,0)[1]});
-	    
-		    Point punto_A= new Point(scene_corners.get(0,0));
-		    Point punto_B= new Point(scene_corners.get(1,0));
-		    Point punto_C= new Point(scene_corners.get(2,0));
-		    Point punto_D= new Point(scene_corners.get(3,0));
-		   
-		    Core.line(img_matches, punto_A, punto_B, new Scalar(0, 255, 0),4);
-		    Core.line(img_matches, punto_B, punto_C, new Scalar(0, 255, 0),4);
-		    Core.line(img_matches, punto_C, punto_D, new Scalar(0, 255, 0),4);
-		    Core.line(img_matches, punto_D, punto_A, new Scalar(0, 255, 0),4);
-		    
-		    double distancia_AB,distancia_AC,distancia_AD;
-		    double angulo_A,angulo_B,angulo_C,angulo_D;
-		    	    	    
-		    distancia_AB=distancia(punto_A,punto_B);
-		    distancia_AC=distancia(punto_A,punto_C);
-		    distancia_AD=distancia(punto_A,punto_D);
-	
-		    angulo_A=angulo(punto_A, punto_D,punto_B);
-		    angulo_B=angulo(punto_B, punto_A,punto_C);
-		    angulo_C=angulo(punto_C, punto_B,punto_D);
-		    angulo_D=angulo(punto_D, punto_C,punto_A);
-		    
-		    String debug= " A_A="+angulo_A+" A_B="+angulo_B+" A_C="+angulo_C+" A_D="+angulo_D;
-		    
-		    Core.putText(img_matches, debug, new Point(10, 100), 3, 0.5, new Scalar(0, 0, 255, 255),1);
-		    
-		    if((angulo_A < (3.1415 - 0.35)) && (angulo_A > 0.35) && 
-		    		(angulo_B < (3.1415 - 0.35)) && (angulo_B > 0.35) &&
-		    		(angulo_C < (3.1415 - 0.35)) && (angulo_C > 0.35) &&
-		    		(angulo_D < (3.1415 - 0.35)) && (angulo_D > 0.35) && 
-		    		distancia_AB > 100 && distancia_AC > 120 && distancia_AD > 50
-		    		){
-		    					
-		    				SaveImage(img_matches, "verdaderos");
-		    				scene_gray.release();
-		    		    	template.release();
-		    		    	template_gray.release();
-		    		    	mask.release();
-		    		    	mask_gray.release();
-		    				return true;
-		    	
-		    	
-		    }
-		    
-		    SaveImage(img_matches, "falsos");
-		    
-		    scene_gray.release();
-	    	template.release();
-	    	template_gray.release();
-	    	mask.release();
-	    	mask_gray.release();
-			
-	    	
-	    	return false;
-	    
-	    }else{
-	    	return false;
-	    }
-	}
+//    private boolean reconocerp(int idpesos, Mat gray) {
+//		Mat scene_gray=new Mat(),template= new Mat(),template_gray= new Mat(),mask= new Mat(),mask_gray= new Mat();
+//		
+//		
+//		
+//		Bitmap bMap0=BitmapFactory.decodeResource(getResources(),templateimg(idpesos));
+//        Utils.bitmapToMat(bMap0, template);
+//        Imgproc.cvtColor(template, template_gray, Imgproc.COLOR_BGR2GRAY,CvType.CV_8UC1);
+//          
+//        Bitmap bMap2=BitmapFactory.decodeResource(getResources(),maskimg(idpesos));
+//	    Utils.bitmapToMat(bMap2, mask);
+//	    Imgproc.cvtColor(mask, mask_gray, Imgproc.COLOR_BGR2GRAY,CvType.CV_8UC1);
+//	    
+//	    scene_gray=gray;
+//	    
+//	    
+//	    MatOfKeyPoint keypoints_object = new MatOfKeyPoint();
+//	    MatOfKeyPoint keypoints_scene = new MatOfKeyPoint();
+//	    Mat descriptors_object = new Mat();
+//	    Mat descriptors_scene = new Mat();
+//	    
+//	    //ORB es el numero 5 para detector de features
+//	    FeatureDetector fd = FeatureDetector.create(FeatureDetector.ORB);
+//	    
+//	    fd.detect(scene_gray, keypoints_scene);
+//	    fd.detect(template_gray, keypoints_object,mask_gray);
+//	    
+//	    
+//	    
+//	    int cke=keypoints_scene.toList().size(),ckt=keypoints_object.toList().size();
+//	    
+//	    
+//	    	    
+//	    if(cke>50 && ckt>50){
+//	    	//sigo trabajando
+//			    
+//		    DescriptorExtractor extractor= DescriptorExtractor.create(DescriptorExtractor.ORB);
+//		    
+//		    extractor.compute(scene_gray, keypoints_scene, descriptors_scene);
+//		    extractor.compute(template_gray, keypoints_object, descriptors_object);
+//		
+//		    DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+//		    
+//		    MatOfDMatch good_matches = new MatOfDMatch();
+//		    		    
+//		    List<MatOfDMatch> matches=new ArrayList<MatOfDMatch>();
+//		    matcher.knnMatch( descriptors_object, descriptors_scene, matches, 2 );
+//		    
+//		    List<DMatch> goodmatcheslist = new ArrayList<DMatch>();
+//		    for (int i = 0; i < matches.size(); ++i)
+//		    { 
+//		    	if(matches.get(i).toArray().length > 1){
+//		    	
+//		    		DMatch m1=new DMatch();
+//		    		DMatch m2=new DMatch();
+//		    		m1=matches.get(i).toArray()[0];
+//		    		m2=matches.get(i).toArray()[1];
+//				    if(m1.distance>m2.distance*0.6)goodmatcheslist.add(m1);
+//		    	}
+//		    }
+//		    		    		    
+//		    good_matches.fromList(goodmatcheslist);
+//		   	   	    
+//		    Mat img_matches = new Mat();
+//		    Features2d.drawMatches(template_gray, keypoints_object,scene_gray, keypoints_scene, good_matches, img_matches);
+//			   
+//		    LinkedList<Point> objList = new LinkedList<Point>();
+//		    LinkedList<Point> sceneList = new LinkedList<Point>();
+//		    List<DMatch> good_matches_list = good_matches.toList();
+//	
+//		    List<KeyPoint> keypoints_objectList = keypoints_object.toList();
+//		    List<KeyPoint> keypoints_sceneList = keypoints_scene.toList();
+//	
+//		    for(int i = 0; i<good_matches_list.size(); i++)
+//		    {
+//		        objList.addLast(keypoints_objectList.get(good_matches_list.get(i).queryIdx).pt);
+//		        sceneList.addLast(keypoints_sceneList.get(good_matches_list.get(i).trainIdx).pt);
+//		    }
+//	
+//		    MatOfPoint2f obj = new MatOfPoint2f();
+//		    obj.fromList(objList);
+//	
+//		    MatOfPoint2f scene = new MatOfPoint2f();
+//		    scene.fromList(sceneList);
+//	
+//		    Mat hg = Calib3d.findHomography(obj, scene, Calib3d.RANSAC, 5);
+//	
+//		    Mat obj_corners = new Mat(4,1,CvType.CV_32FC2);
+//		    Mat scene_corners = new Mat(4,1,CvType.CV_32FC2);
+//	
+//		    obj_corners.put(0, 0, new double[] {0,0});
+//		    obj_corners.put(1, 0, new double[] {template_gray.cols(),0});
+//		    obj_corners.put(2, 0, new double[] {template_gray.cols(),template_gray.rows()});
+//		    obj_corners.put(3, 0, new double[] {0,template_gray.rows()});
+//	
+//		    Core.perspectiveTransform(obj_corners,scene_corners, hg);
+//		    scene_corners.put(0,0,new double[] {scene_corners.get(0,0)[0]+template_gray.cols(),scene_corners.get(0,0)[1]});
+//		    scene_corners.put(1,0,new double[] {scene_corners.get(1,0)[0]+template_gray.cols(),scene_corners.get(1,0)[1]});
+//		    scene_corners.put(2,0,new double[] {scene_corners.get(2,0)[0]+template_gray.cols(),scene_corners.get(2,0)[1]});
+//		    scene_corners.put(3,0,new double[] {scene_corners.get(3,0)[0]+template_gray.cols(),scene_corners.get(3,0)[1]});
+//	    
+//		    Point punto_A= new Point(scene_corners.get(0,0));
+//		    Point punto_B= new Point(scene_corners.get(1,0));
+//		    Point punto_C= new Point(scene_corners.get(2,0));
+//		    Point punto_D= new Point(scene_corners.get(3,0));
+//		   
+//		    Core.line(img_matches, punto_A, punto_B, new Scalar(0, 255, 0),4);
+//		    Core.line(img_matches, punto_B, punto_C, new Scalar(0, 255, 0),4);
+//		    Core.line(img_matches, punto_C, punto_D, new Scalar(0, 255, 0),4);
+//		    Core.line(img_matches, punto_D, punto_A, new Scalar(0, 255, 0),4);
+//		    
+//		    double distancia_AB,distancia_AC,distancia_AD;
+//		    double angulo_A,angulo_B,angulo_C,angulo_D;
+//		    	    	    
+//		    distancia_AB=distancia(punto_A,punto_B);
+//		    distancia_AC=distancia(punto_A,punto_C);
+//		    distancia_AD=distancia(punto_A,punto_D);
+//	
+//		    angulo_A=angulo(punto_A, punto_D,punto_B);
+//		    angulo_B=angulo(punto_B, punto_A,punto_C);
+//		    angulo_C=angulo(punto_C, punto_B,punto_D);
+//		    angulo_D=angulo(punto_D, punto_C,punto_A);
+//		    
+//		    String debug= " A_A="+angulo_A+" A_B="+angulo_B+" A_C="+angulo_C+" A_D="+angulo_D;
+//		    
+//		    Core.putText(img_matches, debug, new Point(10, 100), 3, 0.5, new Scalar(0, 0, 255, 255),1);
+//		    
+//		    if((angulo_A < (3.1415 - 0.35)) && (angulo_A > 0.35) && 
+//		    		(angulo_B < (3.1415 - 0.35)) && (angulo_B > 0.35) &&
+//		    		(angulo_C < (3.1415 - 0.35)) && (angulo_C > 0.35) &&
+//		    		(angulo_D < (3.1415 - 0.35)) && (angulo_D > 0.35) && 
+//		    		distancia_AB > 100 && distancia_AC > 120 && distancia_AD > 50
+//		    		){
+//		    					
+//		    				SaveImage(img_matches, "verdaderos");
+//		    				scene_gray.release();
+//		    		    	template.release();
+//		    		    	template_gray.release();
+//		    		    	mask.release();
+//		    		    	mask_gray.release();
+//		    				return true;
+//		    	
+//		    	
+//		    }
+//		    
+//		    SaveImage(img_matches, "falsos");
+//		    
+//		    scene_gray.release();
+//	    	template.release();
+//	    	template_gray.release();
+//	    	mask.release();
+//	    	mask_gray.release();
+//			
+//	    	
+//	    	return false;
+//	    
+//	    }else{
+//	    	return false;
+//	    }
+//	}
     
     private void paper_dolar(Mat scene,Mat template){
     	
@@ -448,61 +414,61 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 	    
     }
     
-    private double distancia(Point pt1,Point pt2){
-    	double res;
-    	res=Math.sqrt(Math.pow(pt1.x - pt2.x, 2) + Math.pow(pt1.y - pt2.y, 2) );
-    	return res;
-    }
-    /**
-    Funcion que calcula la diferencia de angulos entre dos rectas formadas
-    por tres puntos a->b y a->c , es decir el angulo formado por las
-    dos rectas (ang(a->c)-ang(a->b)), pero siempre positivo.
-    Por lo tanto, obtenemos el angulo en sentido antihorario.
-    @param uno : Primer punto.
-    @param dos : Segundo punto.
-    @param tres : Tercer punto.
-    @return : Angulo en radianes [0-2PI] con la diferencia entre las
-    rectas uno-tres y uno-dos.
-    */
-
-    public static double angulo(Point uno,Point dos,Point tres){
-
-    //transladamos al origen de coordenadas los tres puntos
-    Point pi=new Point(dos.x-uno.x,dos.y-uno.y);
-    Point pj=new Point(tres.x-uno.x,tres.y-uno.y);
-    //calculamos su angulo de coordenada polar
-    double ang_pi=Math.atan2((double)pi.x,(double)pi.y);
-    double ang_pj=Math.atan2((double)pj.x,(double)pj.y);
-
-    //hallamos la diferencia
-    double ang=ang_pj-ang_pi;
-
-    //Si el angulo es negativo le sumamos 2PI para obtener el
-    //angulo en el intervalo [0-2PI]; 
-    //siempre obtenemos ángulos positivos (en sentido antihorario)
-    if (ang<0.0)
-    	return ang+(2.0*Math.PI);
-    else
-    	return ang;
-    }//fin angulo
-    
-
-    @SuppressLint("SimpleDateFormat")
-	private void SaveImage (Mat mat,String name ) {
-  	  
-  	  File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-  	  SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
-  	  Date now = new Date();
-  	  
-  	  String filename = formatter.format(now) + name +".jpg";
-  	  File file = new File(path, filename);
-
-  	  Boolean bool = null;
-  	  filename = file.toString();
-  	  bool = Highgui.imwrite(filename,mat);
-  	  
-  	  if (bool!=true) throw new AssertionError("No guardo la imagen");
-  	 }
+//    private double distancia(Point pt1,Point pt2){
+//    	double res;
+//    	res=Math.sqrt(Math.pow(pt1.x - pt2.x, 2) + Math.pow(pt1.y - pt2.y, 2) );
+//    	return res;
+//    }
+//    /**
+//    Funcion que calcula la diferencia de angulos entre dos rectas formadas
+//    por tres puntos a->b y a->c , es decir el angulo formado por las
+//    dos rectas (ang(a->c)-ang(a->b)), pero siempre positivo.
+//    Por lo tanto, obtenemos el angulo en sentido antihorario.
+//    @param uno : Primer punto.
+//    @param dos : Segundo punto.
+//    @param tres : Tercer punto.
+//    @return : Angulo en radianes [0-2PI] con la diferencia entre las
+//    rectas uno-tres y uno-dos.
+//    */
+//
+//    public static double angulo(Point uno,Point dos,Point tres){
+//
+//    //transladamos al origen de coordenadas los tres puntos
+//    Point pi=new Point(dos.x-uno.x,dos.y-uno.y);
+//    Point pj=new Point(tres.x-uno.x,tres.y-uno.y);
+//    //calculamos su angulo de coordenada polar
+//    double ang_pi=Math.atan2((double)pi.x,(double)pi.y);
+//    double ang_pj=Math.atan2((double)pj.x,(double)pj.y);
+//
+//    //hallamos la diferencia
+//    double ang=ang_pj-ang_pi;
+//
+//    //Si el angulo es negativo le sumamos 2PI para obtener el
+//    //angulo en el intervalo [0-2PI]; 
+//    //siempre obtenemos ángulos positivos (en sentido antihorario)
+//    if (ang<0.0)
+//    	return ang+(2.0*Math.PI);
+//    else
+//    	return ang;
+//    }//fin angulo
+//    
+//
+//    @SuppressLint("SimpleDateFormat")
+//	private void SaveImage (Mat mat,String name ) {
+//  	  
+//  	  File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+//  	  SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+//  	  Date now = new Date();
+//  	  
+//  	  String filename = formatter.format(now) + name +".jpg";
+//  	  File file = new File(path, filename);
+//
+//  	  Boolean bool = null;
+//  	  filename = file.toString();
+//  	  bool = Highgui.imwrite(filename,mat);
+//  	  
+//  	  if (bool!=true) throw new AssertionError("No guardo la imagen");
+//  	 }
     private int templateimg(int idpesos){
     	int res=0;
     	switch (idpesos) {
@@ -604,43 +570,36 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     	return res;
     }
     
-	private void playsound(int idpesos){
+	private int sound(int idpesos){
     	switch (idpesos) {
     	 case 0:
     	 case 1: 
-    		 this.player = MediaPlayer.create(this, R.raw.dospesos);
-    		 this.player.start();
-         break;
+    		 return(R.raw.dospesos);
+    	  
     	 case 2:
     	 case 3:
-    		 this.player = MediaPlayer.create(this, R.raw.cincopesos);
-    		 this.player.start();
-    	 break;
+    		 return(R.raw.cincopesos);
+
     	 case 4:
     	 case 5:
-    		 this.player = MediaPlayer.create(this, R.raw.diezpesos);
-    		 this.player.start();
-    	 break;
+    		 return(R.raw.diezpesos);
+    		 
     	 case 6:
     	 case 7:
-    		 this.player = MediaPlayer.create(this, R.raw.veintepesos);
-    		 this.player.start();
-    	 break;
+    		 return( R.raw.veintepesos);
+
+
     	 case 8:
     	 case 9:
-    		 this.player = MediaPlayer.create(this, R.raw.cincuentapesos);
-    		 this.player.start();
-    	 break;
+    		 return(R.raw.cincuentapesos);
+
     	 case 10:
     	 case 11:
     	 case 12:
     	 case 13:
-    		 this.player = MediaPlayer.create(this, R.raw.cienpesos);
-    		 this.player.start();
-    	 break;
-    	 
+    		 return(R.raw.cienpesos);
     	 default: 
-         break;
+         return 0;
     	}
     	
     }

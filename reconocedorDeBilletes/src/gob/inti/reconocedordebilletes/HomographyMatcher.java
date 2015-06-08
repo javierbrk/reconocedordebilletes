@@ -227,8 +227,8 @@ public class HomographyMatcher {
 		
 		detector.detect(esc.ImagenPrePocesada, esc.keypoints);
 	}
-	private void Detectar(Billete bil) {
-		detector.detect(bil.bTemplate.ImagenPrePocesada, bil.bTemplate.keypoints,bil.bTemplate.Mascara);
+	private void Detectar(Template temp) {
+		detector.detect(temp.ImagenPrePocesada, temp.keypoints,temp.Mascara);
 
 	}
 	private void ExtraerDescriptores(Escena esc) throws NotEnougthKeypoints {

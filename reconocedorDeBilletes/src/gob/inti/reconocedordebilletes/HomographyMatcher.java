@@ -205,12 +205,41 @@ public class HomographyMatcher {
 	
 	public void Inicializar(int config) {
 		switch (config) {
+		//ORB,ORB,BRUTEFORCE anda
 		case 0:
 			detector = FeatureDetector.create(FeatureDetector.ORB);
 			extractor= DescriptorExtractor.create(DescriptorExtractor.ORB);
 			matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
 			break;
 
+		//FAST,ORB,BRUTEFORCE no anda
+		case 1:
+			detector = FeatureDetector.create(FeatureDetector.FAST);
+			extractor= DescriptorExtractor.create(DescriptorExtractor.ORB);
+			matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+			break;
+		
+		//FAST,FREAK,BRUTEFORCE no anda
+		case 2:
+			detector = FeatureDetector.create(FeatureDetector.FAST);
+			extractor= DescriptorExtractor.create(DescriptorExtractor.FREAK);
+			matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+			break;
+		
+		//ORB,BRIEF,BRUTEFORCE anda
+		case 3:
+			detector = FeatureDetector.create(FeatureDetector.ORB);
+			extractor= DescriptorExtractor.create(DescriptorExtractor.BRIEF);
+			matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+			break;
+						
+		//FAST,BRIEF,BRUTEFORCE no anda
+		case 4:
+			detector = FeatureDetector.create(FeatureDetector.FAST);
+			extractor= DescriptorExtractor.create(DescriptorExtractor.BRIEF);
+			matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+			break;
+			
 		default:
 			break;
 		}

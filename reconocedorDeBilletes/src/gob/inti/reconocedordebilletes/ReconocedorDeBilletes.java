@@ -194,6 +194,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     	if(mCount == 5)
     	{
 	        hm = new HomographyMatcher();
+	        //Solo funcionan las configuraciones 0 y 3 para inicializar	        
 	        hm.Inicializar(0);
 	        try {
 				cargartemplates();

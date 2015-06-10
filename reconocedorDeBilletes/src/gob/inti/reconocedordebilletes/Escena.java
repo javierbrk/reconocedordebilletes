@@ -26,4 +26,12 @@ public class Escena {
 		Descriptores.release();
 		keypoints.release();
 	}
+	
+	public void finalize()
+	{
+		if(ImagenOriginal!=null)
+		{
+			Destruir();
+		}
+	}
 }

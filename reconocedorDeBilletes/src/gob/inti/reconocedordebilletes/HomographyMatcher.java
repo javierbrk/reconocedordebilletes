@@ -61,8 +61,9 @@ public class HomographyMatcher {
 	}
 	private EscenaProcesada determinarCorrespondencia(Escena esc,
 			Billete billete, MatOfDMatch good_matches) {
+		
 		Mat img_matches = new Mat();
-		Features2d.drawMatches(billete.bTemplate.ImagenPrePocesada, esc.keypoints,esc.ImagenPrePocesada, esc.keypoints, good_matches, img_matches);
+		Features2d.drawMatches(billete.bTemplate.ImagenPrePocesada, billete.bTemplate.keypoints,esc.ImagenPrePocesada, esc.keypoints, good_matches, img_matches);
 		   
 		LinkedList<Point> objList = new LinkedList<Point>();
 		LinkedList<Point> sceneList = new LinkedList<Point>();
@@ -82,7 +83,7 @@ public class HomographyMatcher {
 
 		MatOfPoint2f scene = new MatOfPoint2f();
 		scene.fromList(sceneList);
-
+		//TODO: VER DE PROBAR OTROS ALGORITMOS
 		Mat hg = Calib3d.findHomography(obj, scene, Calib3d.RANSAC, 5);
 
 		Mat obj_corners = new Mat(4,1,CvType.CV_32FC2);

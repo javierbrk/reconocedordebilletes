@@ -106,7 +106,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     	for (EDenominacionBilletes denominacion : EDenominacionBilletes.values()) 
     	{
 			
-			Billete b = new Billete(); 
+			Billete b = new Billete(this,sound(denominacion.value())); 
 			Mat mask = new Mat(),mask_gray = new Mat();
 			
 			Bitmap bMap0=BitmapFactory.decodeResource(getResources(),templateimg(denominacion.value()));
@@ -117,8 +117,6 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 		    Imgproc.cvtColor(mask, mask_gray, Imgproc.COLOR_BGR2GRAY,CvType.CV_8UC1);
 			b.bTemplate.Mascara = mask_gray;
 		    
-			b.audio = sound(denominacion.value());
-			
 			b.denominacion = denominacion;
 			
 			lb.add(b);
@@ -211,7 +209,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 				for (EscenaProcesada escenaProcesada : lesc) {
 					if (escenaProcesada.correspondencia)
 					{
-						escenaProcesada.Contraparete.anunciate(this);
+						escenaProcesada.Contraparete.anunciate();
 					}
 				}
 			} catch (NotEnougthKeypoints e) {

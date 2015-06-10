@@ -10,18 +10,19 @@ import android.media.MediaPlayer;
  */
 public class Billete {
 	public Template bTemplate;
-	public int audio; // the raw resource id 
 	EDenominacionBilletes denominacion;
 	
 	private MediaPlayer player;
 	
-	public Billete()
+	public Billete(Context context,int audio)
 	{
 		bTemplate = new Template();
+		player = MediaPlayer.create(context,audio);
+		
 	}
 	
-	public void anunciate(Context context)
+	public void anunciate()
 	{
-		player = MediaPlayer.create(context,audio);
+		player.start();
 	}
 }

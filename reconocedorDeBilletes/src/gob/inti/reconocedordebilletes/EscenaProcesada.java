@@ -6,6 +6,7 @@ public class EscenaProcesada {
 	public Mat imagenDelMacheo;
 	public boolean correspondencia;
 	public Billete Contraparete;
+	public long tiempoDeProcesamiento;
 	
 	public void finalize()
 	{

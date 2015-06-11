@@ -27,7 +27,7 @@ import org.opencv.imgproc.Imgproc;
 import android.annotation.SuppressLint;
 import android.os.Environment;
 
-public class HomographyMatcher {
+public class HomographyMatcher implements IComparadorDeReconocedores {
 
 	public FeatureDetector detector;
 	public DescriptorExtractor extractor;
@@ -46,19 +46,25 @@ public class HomographyMatcher {
 	public List<EscenaProcesada> ProcesarImagen(Mat imagen) throws NotEnougthKeypoints {
 		List<EscenaProcesada> res= new ArrayList<EscenaProcesada>();
 		Escena esc = new Escena();
+		long partialtime = 0;
 		esc.ImagenOriginal = imagen;
-		
+		long startTime = System.currentTimeMillis();
 		ExtraerDescriptores(esc);
-		
+		long endTime = System.currentTimeMillis();
+		partialtime = endTime - startTime;
 		for (Billete billete : billetes) {
-		
+			long startmacheo = System.currentTimeMillis();
 			MatOfDMatch good_matches = SeleccionDeGoodMatches(esc,billete,0);
+			EscenaProcesada e = determinarCorrespondencia(esc, billete,	good_matches);
 			
-			res.add(determinarCorrespondencia(esc, billete,	good_matches));
+			long endmacheo = System.currentTimeMillis();
+			e.tiempoDeProcesamiento = partialtime + endmacheo - startmacheo; 
+			res.add(e);
 		}
 		esc.Destruir();
 		return res;
 	}
+	
 	private EscenaProcesada determinarCorrespondencia(Escena esc,
 			Billete billete, MatOfDMatch good_matches) {
 		
@@ -306,5 +312,34 @@ public class HomographyMatcher {
 		}
 	    		    		    
 	    return good_matches;
+	}
+
+	private ContenedorEstadistico c;
+	@Override
+	public boolean Probar(Mat imagen, EDenominacionBilletes ExpectedValue,
+			boolean imagenCorrespondeConExpectedValue) {
+		List<EscenaProcesada> lista;
+		try {
+			lista = ProcesarImagen(imagen);
+			for (EscenaProcesada escenaProcesada : lista) {
+				if(escenaProcesada.Contraparete.denominacion==ExpectedValue)
+				{
+					if(escenaProcesada.correspondencia)
+					{
+						c.incCorrectos(escenaProcesada.tiempoDeProcesamiento);
+					}
+				}
+			}
+		} catch (NotEnougthKeypoints e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	@Override
+	public ContenedorEstadistico estadisticas() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

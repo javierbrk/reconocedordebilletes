@@ -1,6 +1,5 @@
 package gob.inti.reconocedordebilletes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.opencv.core.MatOfDMatch;

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.opencv.android.Utils;
-import org.opencv.imgproc.Imgproc;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -100,7 +99,6 @@ public class Probador {
 		Log.d("Files", "Size: "+ file.length);
 		for (int k=0; k < file.length; k++)
 		{
-			boolean b = true;
 			Mat imagen =  new Mat();
 		    Log.d(TAG+"Files", "FileName:" + file[k].getPath());
 		    Bitmap bMap=BitmapFactory.decodeFile(file[k].getPath());

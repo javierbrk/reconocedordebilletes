@@ -7,15 +7,11 @@ import gob.inti.reconocedordebilletes.EDenominacionBilletes;
 import gob.inti.reconocedordebilletes.HomographyMatcher;
 import gob.inti.reconocedordebilletes.IReconocedores;
 
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
 
 import android.test.InstrumentationTestCase;
-import android.util.Log;
-import junit.framework.TestCase;
-import android.app.Activity;
-import android.os.Bundle;
+
 
 
 /**
@@ -23,7 +19,6 @@ import android.os.Bundle;
  *
  */
 public class ProbadorTest extends InstrumentationTestCase {
-
 
 	static {
 	    if (!OpenCVLoader.initDebug()) {
@@ -90,7 +85,8 @@ public class ProbadorTest extends InstrumentationTestCase {
 	 * Test method for {@link org.opencv.samples.tutorial1.Probador#probarlosmetodos()}.
 	 */
 	public void testProbarlosmetodos() {
-	      
+		//System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
 		IReconocedores c = new HomographyMatcher();
 		p.agregarComparador(c);
 		p.agregarCarpetaDeImagenesCorrectas("/buenas");

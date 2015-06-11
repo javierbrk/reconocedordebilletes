@@ -52,7 +52,7 @@ public class HomographyMatcher {
 		
 		for (Billete billete : billetes) {
 		
-			MatOfDMatch good_matches = SeleccionDeGoodMatches(esc,billete,0);
+			MatOfDMatch good_matches = SeleccionDeGoodMatches(esc,billete);
 			
 			res.add(determinarCorrespondencia(esc, billete,	good_matches));
 		}
@@ -301,10 +301,9 @@ public class HomographyMatcher {
 	
 	}
 	
-	private MatOfDMatch SeleccionDeGoodMatches (Escena esc,Billete b, int config) {
+	protected MatOfDMatch SeleccionDeGoodMatches (Escena esc,Billete b) {
 		MatOfDMatch good_matches = new MatOfDMatch();
-		switch (config) {
-		case 0: ///knnMatch
+		//knnMatch
 		
 			
 			List<MatOfDMatch> matches = new ArrayList<MatOfDMatch>();
@@ -323,16 +322,7 @@ public class HomographyMatcher {
 		    	}
 		    }
 		    good_matches.fromList(goodmatcheslist);
-		
-			break;
-		case 1: ///min dist
-			break;
-		case 2: ///cross check
-			break;
-		default:
-			break;
-		}
-	    		    		    
+						    		    
 	    return good_matches;
 	}
 }

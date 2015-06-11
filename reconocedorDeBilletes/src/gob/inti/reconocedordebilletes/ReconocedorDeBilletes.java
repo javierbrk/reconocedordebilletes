@@ -55,9 +55,10 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     private CameraBridgeViewBase mOpenCvCameraView;
     private boolean              mIsJavaCamera = true;
     private MenuItem             mItemSwitchCamera = null;
-    private HomographyMatcher    hm;
+    //private HomographyMatcher    hm;
+    private ThresholdHomographyMatcher    hm;
     private int					mCount=0;
-    private MediaPlayer player;
+    
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -193,7 +194,8 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     	mCount++;
     	if(mCount == 5)
     	{
-	        hm = new HomographyMatcher();
+	        //hm = new HomographyMatcher();
+    		hm = new ThresholdHomographyMatcher();
 	        //Solo funcionan las configuraciones 0 y 3 para inicializar	        
 	        hm.Inicializar(0);
 	        try {

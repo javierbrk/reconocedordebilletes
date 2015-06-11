@@ -55,15 +55,10 @@ public class HomographyMatcher implements IReconocedores {
 		long endTime = System.currentTimeMillis();
 		partialtime = endTime - startTime;
 		for (Billete billete : billetes) {
-<<<<<<< HEAD
+
 			long startmacheo = System.currentTimeMillis();
-			MatOfDMatch good_matches = SeleccionDeGoodMatches(esc,billete,0);
-			EscenaProcesada e = determinarCorrespondencia(esc, billete,	good_matches);
-=======
-		
 			MatOfDMatch good_matches = SeleccionDeGoodMatches(esc,billete);
->>>>>>> dde1772e79436bc63e40866535bd1de8b3efeed4
-			
+			EscenaProcesada e = determinarCorrespondencia(esc, billete,	good_matches);		
 			long endmacheo = System.currentTimeMillis();
 			e.tiempoDeProcesamiento = partialtime + endmacheo - startmacheo; 
 			res.add(e);

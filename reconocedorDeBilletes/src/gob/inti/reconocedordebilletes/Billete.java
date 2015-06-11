@@ -10,7 +10,7 @@ import android.media.MediaPlayer;
  */
 public class Billete {
 	public Template bTemplate;
-	EDenominacionBilletes denominacion;
+	public EDenominacionBilletes denominacion;
 	
 	private MediaPlayer player;
 	

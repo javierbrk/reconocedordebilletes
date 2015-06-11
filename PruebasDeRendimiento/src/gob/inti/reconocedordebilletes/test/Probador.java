@@ -1,9 +1,13 @@
 package gob.inti.reconocedordebilletes.test;
 
+import gob.inti.reconocedordebilletes.ContenedorEstadistico;
 import gob.inti.reconocedordebilletes.EDenominacionBilletes;
-import gob.inti.reconocedordebilletes.IComparadorDeReconocedores;
+import gob.inti.reconocedordebilletes.EscenaProcesada;
+import gob.inti.reconocedordebilletes.IReconocedores;
+import gob.inti.reconocedordebilletes.NotEnougthKeypoints;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.opencv.android.Utils;
 import org.opencv.imgproc.Imgproc;
@@ -21,20 +25,20 @@ import android.os.Environment;
 
 public class Probador {
 	private static final String TAG = "PROBADOR";
-	ArrayList<IComparadorDeReconocedores> listadecomparadores;
+	ArrayList<IReconocedores> listadecomparadores;
 	ArrayList<String> listadecarpetasconimagenescorrectas;
 	ArrayList<String> listadecarpetasconimagenesincorrectas;
 	private EDenominacionBilletes denominacionAprobar;
 	
 	public Probador (EDenominacionBilletes denominacionAprobar)
 	{
-		listadecomparadores = new ArrayList<IComparadorDeReconocedores>() ;
+		listadecomparadores = new ArrayList<IReconocedores>() ;
 		listadecarpetasconimagenescorrectas = new ArrayList<String>() ;
 		listadecarpetasconimagenesincorrectas  = new ArrayList<String>() ;
 		this.denominacionAprobar = denominacionAprobar;
 	}
 	
-	public void agregarComparador(IComparadorDeReconocedores c)
+	public void agregarComparador(IReconocedores c)
 	{
 		listadecomparadores.add(c);
 	}
@@ -70,25 +74,26 @@ public class Probador {
         
 		if(listadecomparadores.size()!= 0 && listadecarpetasconimagenescorrectas.size()!= 0 && listadecarpetasconimagenesincorrectas.size() != 0)
 		{
+			ContenedorEstadistico c = new ContenedorEstadistico();
 			for (int i = 0; i < listadecomparadores.size(); i++) {
 				listadecomparadores.get(i).Inicializar(0); 
 				for (int j = 0; j < listadecarpetasconimagenescorrectas.size(); j++) {
 					
 					path = Environment.getExternalStorageDirectory().toString()+"/Pictures" +listadecarpetasconimagenescorrectas.get(j);
-					probarUnaCarpeta(path, i,true);
+					probarUnaCarpeta(path, i,true,c);
 					
 				}
 				for (int k = 0; k < listadecarpetasconimagenesincorrectas.size(); k++) {
 					path = Environment.getExternalStorageDirectory().toString()+"/Pictures" +listadecarpetasconimagenesincorrectas.get(k);
-					probarUnaCarpeta(path, i,false);
+					probarUnaCarpeta(path, i,false,c);
 				}
-				Log.d(TAG+"  -   estadisticas - ",listadecomparadores.get(i).estadisticas().toString());
+				Log.d(TAG+"  -   estadisticas - ",c.toString());
 			}
 			
 		}
 	}
 
-	private void probarUnaCarpeta(String path, int i, boolean expectedfoldervalue) {
+	private void probarUnaCarpeta(String path, int i, boolean expectedfoldervalue, ContenedorEstadistico c) {
 		Log.d("Files", "Path: " + path);
 		File f = new File(path);        
 		File file[] = f.listFiles();
@@ -103,10 +108,47 @@ public class Probador {
 			{
 		    	Utils.bitmapToMat(bMap, imagen);
 			    Log.d(TAG+"llenar_templates", "paso 3");
-			    Imgproc.cvtColor(imagen, imagen, Imgproc.COLOR_BGR2GRAY);
-			    listadecomparadores.get(i).Probar(imagen,this.denominacionAprobar, expectedfoldervalue);
+			    Probar(imagen,this.denominacionAprobar, expectedfoldervalue,listadecomparadores.get(i),c);
 		    }
 		}
+	}
+	
+	public boolean Probar(Mat imagen, EDenominacionBilletes ExpectedValue,boolean imagenCorrespondeConExpectedValue,IReconocedores matcher,ContenedorEstadistico c ) 
+	{
+		
+		List<EscenaProcesada> lista;
+		try {
+			lista = matcher.ProcesarImagen(imagen);
+			for (EscenaProcesada escenaProcesada : lista) {
+				if(escenaProcesada.Contraparete.denominacion==ExpectedValue)
+				{
+					if(escenaProcesada.correspondencia)
+					{
+						c.incCorrectos(escenaProcesada.tiempoDeProcesamiento);
+					}
+					else
+					{
+						c.incFalsoNegativo(escenaProcesada.tiempoDeProcesamiento);
+					}
+				}
+				else
+				{
+					if(escenaProcesada.correspondencia)
+					{
+						c.incFalsoPositivo(escenaProcesada.tiempoDeProcesamiento);
+					}
+					else
+					{
+						c.incCorrectos(escenaProcesada.tiempoDeProcesamiento);
+					}
+				}
+			}
+		} catch (NotEnougthKeypoints e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 	
 }

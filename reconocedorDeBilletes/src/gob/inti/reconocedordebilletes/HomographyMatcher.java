@@ -27,7 +27,7 @@ import org.opencv.imgproc.Imgproc;
 import android.annotation.SuppressLint;
 import android.os.Environment;
 
-public class HomographyMatcher implements IComparadorDeReconocedores {
+public class HomographyMatcher implements IReconocedores {
 
 	public FeatureDetector detector;
 	public DescriptorExtractor extractor;
@@ -40,6 +40,8 @@ public class HomographyMatcher implements IComparadorDeReconocedores {
 			ExtraerDescriptores(billete.bTemplate);
 		}
 	}
+	
+
 	/*
 	 * procesa una imagen con un posible billete
 	 */
@@ -343,32 +345,6 @@ public class HomographyMatcher implements IComparadorDeReconocedores {
 	    return good_matches;
 	}
 
-	private ContenedorEstadistico c;
-	@Override
-	public boolean Probar(Mat imagen, EDenominacionBilletes ExpectedValue,
-			boolean imagenCorrespondeConExpectedValue) {
-		List<EscenaProcesada> lista;
-		try {
-			lista = ProcesarImagen(imagen);
-			for (EscenaProcesada escenaProcesada : lista) {
-				if(escenaProcesada.Contraparete.denominacion==ExpectedValue)
-				{
-					if(escenaProcesada.correspondencia)
-					{
-						c.incCorrectos(escenaProcesada.tiempoDeProcesamiento);
-					}
-				}
-			}
-		} catch (NotEnougthKeypoints e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
-	@Override
-	public ContenedorEstadistico estadisticas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+
 }

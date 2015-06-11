@@ -1,10 +1,12 @@
 package gob.inti.reconocedordebilletes;
+import java.util.List;
+
 import org.opencv.core.Mat;
 /**
  * @author jjorge
  * Interfaz a implementar por todos los métodos de detección para ser probados. 
  */
-public interface IComparadorDeReconocedores {
+public interface IReconocedores {
 	/**
 	 * Pone a cero todos los contadores de la clase para comenzar la verificación
 	 */
@@ -14,13 +16,7 @@ public interface IComparadorDeReconocedores {
 	 * @param imagen imagen donde buscar
 	 * @return true si se encontró el template en la foto
 	 */
-	public boolean Probar(Mat imagen,EDenominacionBilletes ExpectedValue, boolean imagenCorrespondeConExpectedValue);
-	
-	/**
-	 * Estadísticas de las corridas.
-	 * @return el tiempo promedio de detecciones, el tiempo máximo, mínimo, cantidad de detecciones correctas y cantidad de detecciones incorrectas.
-	 */
-	public ContenedorEstadistico estadisticas();
+	public List<EscenaProcesada> ProcesarImagen(Mat imagen) throws NotEnougthKeypoints;
 	
 }
 

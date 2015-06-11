@@ -5,7 +5,7 @@ package gob.inti.reconocedordebilletes.test;
 
 import gob.inti.reconocedordebilletes.EDenominacionBilletes;
 import gob.inti.reconocedordebilletes.HomographyMatcher;
-import gob.inti.reconocedordebilletes.IComparadorDeReconocedores;
+import gob.inti.reconocedordebilletes.IReconocedores;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -38,6 +38,10 @@ public class ProbadorTest extends InstrumentationTestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		 if (!OpenCVLoader.initDebug()) {
+		    	System.out.println("la puta madre ...");
+		    	throw new Exception();
+		    }
 		p=new Probador(EDenominacionBilletes.dosp);
 	}
 
@@ -53,10 +57,10 @@ public class ProbadorTest extends InstrumentationTestCase {
 	 */
 	public void testAgregarComparador() {
 		assertEquals(0, p.numerodeComparadores());
-		IComparadorDeReconocedores c = new HomographyMatcher();
+		IReconocedores c = new HomographyMatcher();
 		p.agregarComparador(c);
 		assertEquals(1, p.numerodeComparadores());
-		IComparadorDeReconocedores c2 = new HomographyMatcher();
+		IReconocedores c2 = new HomographyMatcher();
 		p.agregarComparador(c2);
 		assertEquals(2, p.numerodeComparadores());
 	}
@@ -91,7 +95,7 @@ public class ProbadorTest extends InstrumentationTestCase {
 	 */
 	public void testProbarlosmetodos() {
 	      
-		IComparadorDeReconocedores c = new HomographyMatcher();
+		IReconocedores c = new HomographyMatcher();
 		p.agregarComparador(c);
 		p.agregarCarpetaDeImagenesCorrectas("/buenas");
 		p.agregarCarpetaDeImagenesIncorrectas("/malas");

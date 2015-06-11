@@ -38,10 +38,6 @@ public class ProbadorTest extends InstrumentationTestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		 if (!OpenCVLoader.initDebug()) {
-		    	System.out.println("la puta madre ...");
-		    	throw new Exception();
-		    }
 		p=new Probador(EDenominacionBilletes.dosp);
 	}
 

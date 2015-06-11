@@ -55,9 +55,14 @@ public class HomographyMatcher implements IReconocedores {
 		long endTime = System.currentTimeMillis();
 		partialtime = endTime - startTime;
 		for (Billete billete : billetes) {
+<<<<<<< HEAD
 			long startmacheo = System.currentTimeMillis();
 			MatOfDMatch good_matches = SeleccionDeGoodMatches(esc,billete,0);
 			EscenaProcesada e = determinarCorrespondencia(esc, billete,	good_matches);
+=======
+		
+			MatOfDMatch good_matches = SeleccionDeGoodMatches(esc,billete);
+>>>>>>> dde1772e79436bc63e40866535bd1de8b3efeed4
 			
 			long endmacheo = System.currentTimeMillis();
 			e.tiempoDeProcesamiento = partialtime + endmacheo - startmacheo; 
@@ -310,10 +315,9 @@ public class HomographyMatcher implements IReconocedores {
 	
 	}
 	
-	private MatOfDMatch SeleccionDeGoodMatches (Escena esc,Billete b, int config) {
+	protected MatOfDMatch SeleccionDeGoodMatches (Escena esc,Billete b) {
 		MatOfDMatch good_matches = new MatOfDMatch();
-		switch (config) {
-		case 0: ///knnMatch
+		//knnMatch
 		
 			
 			List<MatOfDMatch> matches = new ArrayList<MatOfDMatch>();
@@ -332,16 +336,7 @@ public class HomographyMatcher implements IReconocedores {
 		    	}
 		    }
 		    good_matches.fromList(goodmatcheslist);
-		
-			break;
-		case 1: ///min dist
-			break;
-		case 2: ///cross check
-			break;
-		default:
-			break;
-		}
-	    		    		    
+						    		    
 	    return good_matches;
 	}
 

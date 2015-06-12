@@ -21,8 +21,16 @@ public class Billete {
 		
 	}
 	
+	public Billete()
+	{
+		bTemplate = new Template();
+	}
+	
 	public void anunciate()
 	{
-		player.start();
+		if (player!= null)
+		{
+			player.start();
+		}
 	}
 }

@@ -82,7 +82,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 
     }
 
-    private void cargartemplates() throws NotEnougthKeypoints {
+    public void cargartemplates(HomographyMatcher hm2) throws NotEnougthKeypoints {
 		// TODO Auto-generated method stub
     	ArrayList<Billete> lb= new ArrayList<Billete>();
     	for (EDenominacionBilletes denominacion : EDenominacionBilletes.values()) 
@@ -103,7 +103,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 			
 			lb.add(b);
 		}
-		hm.ProcesarTemplate(lb);
+		hm2.ProcesarTemplate(lb);
 	}
 
 	@Override
@@ -180,7 +180,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 	        //Solo funcionan las configuraciones 0 y 3 para inicializar	        
 	        hm.Inicializar(0);
 	        try {
-				cargartemplates();
+				cargartemplates(hm);
 			} catch (NotEnougthKeypoints e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -237,7 +237,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     }
     
 
-    private int templateimg(int idpesos){
+    public static int templateimg(int idpesos){
     	int res=0;
     	switch (idpesos) {
 	   	 case 0:
@@ -287,7 +287,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     	}
     	return res;
     }
-    private int maskimg(int idpesos){
+    public static int maskimg(int idpesos){
     	int res=0;
     	switch (idpesos) {
 	   	 case 0:
@@ -338,7 +338,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     	return res;
     }
     
-	private int sound(int idpesos){
+	public static int sound(int idpesos){
     	switch (idpesos) {
     	 case 0:
     	 case 1: 

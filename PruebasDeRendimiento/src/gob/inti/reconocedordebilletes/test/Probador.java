@@ -141,9 +141,17 @@ public class Probador {
 					}
 				}
 			}
-		} catch (NotEnougthKeypoints e) {
+		} 
+		catch (NotEnougthKeypoints e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Log.e(TAG, e.getMessage() + e.getStackTrace());
+		}
+		catch (Exception ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+			Log.e(TAG, ex.getMessage() + ex.getStackTrace());
 		}
 		
 		return false;

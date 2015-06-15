@@ -26,6 +26,7 @@ import org.opencv.imgproc.Imgproc;
 
 import android.annotation.SuppressLint;
 import android.os.Environment;
+import android.util.Log;
 
 public class HomographyMatcher implements IReconocedores {
 
@@ -33,6 +34,7 @@ public class HomographyMatcher implements IReconocedores {
 	public DescriptorExtractor extractor;
 	public DescriptorMatcher matcher;
 	public List<Billete> billetes;
+	private int findHomographymethod;
 	
 	public void ProcesarTemplate(List<Billete> lb) throws NotEnougthKeypoints {
 		billetes = lb;
@@ -54,29 +56,34 @@ public class HomographyMatcher implements IReconocedores {
 		ExtraerDescriptores(esc);
 		long endTime = System.currentTimeMillis();
 		partialtime = endTime - startTime;
+		Log.d("TIEMPOS", "extraccion de descriptores " + Long.toString(partialtime));
 		for (Billete billete : billetes) {
 
 			long startmacheo = System.currentTimeMillis();
 			MatOfDMatch good_matches = SeleccionDeGoodMatches(esc,billete);
 			EscenaProcesada e = determinarCorrespondencia(esc, billete,	good_matches);		
 			long endmacheo = System.currentTimeMillis();
+			Log.d("TIEMPOS", "macheo " + Long.toString(endmacheo - startmacheo));
 			e.tiempoDeProcesamiento = partialtime + endmacheo - startmacheo; 
+			Log.d("TIEMPOS", "t total de procesamiento " + Long.toString(e.tiempoDeProcesamiento));
 			res.add(e);
 		}
 		esc.Destruir();
 		return res;
 	}
 	
-	private EscenaProcesada determinarCorrespondencia(Escena esc,
+	protected EscenaProcesada determinarCorrespondencia(Escena esc,
 			Billete billete, MatOfDMatch good_matches) {
 		
 		Mat img_matches = new Mat();
-		Features2d.drawMatches(billete.bTemplate.ImagenPrePocesada, billete.bTemplate.keypoints,esc.ImagenPrePocesada, esc.keypoints, good_matches, img_matches);
-		   
+		if (AppConfig.DEBUG) {
+			Features2d.drawMatches(billete.bTemplate.ImagenPrePocesada, billete.bTemplate.keypoints,esc.ImagenPrePocesada, esc.keypoints, good_matches, img_matches);
+		}  
+		
 		LinkedList<Point> objList = new LinkedList<Point>();
 		LinkedList<Point> sceneList = new LinkedList<Point>();
 		List<DMatch> good_matches_list = good_matches.toList();
-
+		
 		List<KeyPoint> keypoints_objectList = billete.bTemplate.keypoints.toList();
 		List<KeyPoint> keypoints_sceneList = esc.keypoints.toList();
 
@@ -91,8 +98,9 @@ public class HomographyMatcher implements IReconocedores {
 
 		MatOfPoint2f scene = new MatOfPoint2f();
 		scene.fromList(sceneList);
-		//TODO: VER DE PROBAR OTROS ALGORITMOS
-		Mat hg = Calib3d.findHomography(obj, scene, Calib3d.RANSAC, 5);
+		
+		//TODO: VER DE PROBAR OTROS ALGORITMOS aparte del Calib3d.RANSAC
+		Mat hg = Calib3d.findHomography(obj, scene, findHomographymethod, 5);
 
 		Mat obj_corners = new Mat(4,1,CvType.CV_32FC2);
 		Mat scene_corners = new Mat(4,1,CvType.CV_32FC2);
@@ -112,11 +120,13 @@ public class HomographyMatcher implements IReconocedores {
 		Point punto_B= new Point(scene_corners.get(1,0));
 		Point punto_C= new Point(scene_corners.get(2,0));
 		Point punto_D= new Point(scene_corners.get(3,0));
-   
-		Core.line(img_matches, punto_A, punto_B, new Scalar(0, 255, 0),4);
-		Core.line(img_matches, punto_B, punto_C, new Scalar(0, 255, 0),4);
-		Core.line(img_matches, punto_C, punto_D, new Scalar(0, 255, 0),4);
-		Core.line(img_matches, punto_D, punto_A, new Scalar(0, 255, 0),4);
+		
+		if (AppConfig.DEBUG) {
+			Core.line(img_matches, punto_A, punto_B, new Scalar(0, 255, 0),4);
+			Core.line(img_matches, punto_B, punto_C, new Scalar(0, 255, 0),4);
+			Core.line(img_matches, punto_C, punto_D, new Scalar(0, 255, 0),4);
+			Core.line(img_matches, punto_D, punto_A, new Scalar(0, 255, 0),4);
+		}
 		
 		double distancia_AB,distancia_AC,distancia_AD;
 		double angulo_A,angulo_B,angulo_C,angulo_D;
@@ -132,11 +142,15 @@ public class HomographyMatcher implements IReconocedores {
 		
 		String debug= " A_A="+angulo_A+" A_B="+angulo_B+" A_C="+angulo_C+" A_D="+angulo_D;
 		
+		if (AppConfig.DEBUG) {
 		Core.putText(img_matches, debug, new Point(10, 100), 3, 0.5, new Scalar(0, 0, 255, 255),1);
+		}
 		
 		EscenaProcesada ep = new EscenaProcesada();
 		ep.Contraparete = billete;
+		if (AppConfig.DEBUG) {
 		ep.imagenDelMacheo = img_matches;
+		}
 		if((angulo_A < (3.1415 - 0.35)) && (angulo_A > 0.35) && 
 				(angulo_B < (3.1415 - 0.35)) && (angulo_B > 0.35) &&
 				(angulo_C < (3.1415 - 0.35)) && (angulo_C > 0.35) &&
@@ -145,6 +159,7 @@ public class HomographyMatcher implements IReconocedores {
 				)
 		{
 			ep.correspondencia = true;
+			
 			SaveImage(img_matches, "verdaderos");
 		}
 		else
@@ -157,19 +172,20 @@ public class HomographyMatcher implements IReconocedores {
 	
     @SuppressLint("SimpleDateFormat")
 	private void SaveImage (Mat mat,String name ) {
-  	  
-  	  File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-  	  SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
-  	  Date now = new Date();
-  	  
-  	  String filename = formatter.format(now) + name +".jpg";
-  	  File file = new File(path, filename);
-
-  	  Boolean bool = null;
-  	  filename = file.toString();
-  	  bool = Highgui.imwrite(filename,mat);
-  	  
-  	  if (bool!=true) throw new AssertionError("No guardo la imagen");
+    	if (AppConfig.DEBUG) {
+	  	  File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+	  	  SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+	  	  Date now = new Date();
+	  	  
+	  	  String filename = formatter.format(now) + name +".jpg";
+	  	  File file = new File(path, filename);
+	
+	  	  Boolean bool = null;
+	  	  filename = file.toString();
+	  	  bool = Highgui.imwrite(filename,mat);
+	  	  
+	  	  if (bool!=true) throw new AssertionError("No guardo la imagen");
+    	}
   	 }
 	
 	private double distancia(Point pt1,Point pt2){
@@ -211,8 +227,15 @@ public class HomographyMatcher implements IReconocedores {
     	return ang;
     }//fin angulo
 	 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see gob.inti.reconocedordebilletes.IReconocedores#Inicializar(int)
+	 */
 	public void Inicializar(int config) {
+		
+		//TODO:Probar con otros metodos...
+		findHomographymethod = Calib3d.RANSAC;
+		
 		switch (config) {
 		//ORB,ORB,BRUTEFORCE anda
 		case 0:
@@ -269,7 +292,7 @@ public class HomographyMatcher implements IReconocedores {
 		detector.detect(temp.ImagenPrePocesada, temp.keypoints,temp.Mascara);
 
 	}
-	private void ExtraerDescriptores(Escena esc) throws NotEnougthKeypoints {
+	protected void ExtraerDescriptores(Escena esc) throws NotEnougthKeypoints {
 		Preprocess(esc);
 		//TODO hacer que sea consciente del tipo de dato;
 		/*if (esc instanceof Billete ) {

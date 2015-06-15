@@ -3,7 +3,6 @@
  */
 package gob.inti.reconocedordebilletes.test;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import gob.inti.reconocedordebilletes.Billete;
@@ -12,22 +11,15 @@ import gob.inti.reconocedordebilletes.HomographyMatcher;
 import gob.inti.reconocedordebilletes.IReconocedores;
 import gob.inti.reconocedordebilletes.NotEnougthKeypoints;
 import gob.inti.reconocedordebilletes.R;
-import gob.inti.reconocedordebilletes.ReconocedorDeBilletes;
-
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
-import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
-
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.test.AndroidTestCase;
 import android.test.InstrumentationTestCase;
 import android.util.Log;
-
 
 
 /**
@@ -38,7 +30,7 @@ public class ProbadorTest extends InstrumentationTestCase {
 
 	static {
 	    if (!OpenCVLoader.initDebug()) {
-	    	System.out.println("la puta madre ...");
+	    	System.out.println("ERRORRRRRRRRRRRRR no carga opencv...");
 	    }
 	}
 	
@@ -57,6 +49,7 @@ public class ProbadorTest extends InstrumentationTestCase {
 	 */
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		
 	}
 
 	/**
@@ -93,9 +86,6 @@ public class ProbadorTest extends InstrumentationTestCase {
 		p.agregarCarpetaDeImagenesCorrectas("/home/2");
 		assertEquals(2, p.numerodeCarpetasDeImagenesCorrectas());
 	}
-
-	
-	
 	 
 	/**
 	 * Test method for {@link org.opencv.samples.tutorial1.Probador#probarlosmetodos()}.
@@ -108,30 +98,32 @@ public class ProbadorTest extends InstrumentationTestCase {
 			c.Inicializar(0);
 			cargartemplates(c);
 		} catch (NotEnougthKeypoints e) {
-			// TODO Auto-generated catch block
+			Log.e(TAG+"excepcion", "excepcion al Inicializar");
+			Log.e(TAG,e.toString());
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			Log.e(TAG+"excepcion", "excepcion al Inicializar");
+			Log.e(TAG,e.toString());
 			e.printStackTrace();
 		}
 		p.agregarComparador(c);
 		p.agregarCarpetaDeImagenesCorrectas("/buenas2p");
 		p.agregarCarpetaDeImagenesIncorrectas("/malas");
-		p.agregarCarpetaDeImagenesIncorrectas("/buenas5p");
+		//p.agregarCarpetaDeImagenesIncorrectas("/buenas5p");
 		try {
 			p.probarlosmetodos();
-			System.out.println(java.lang.Runtime.getRuntime().freeMemory());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Log.e(TAG+"excepcion", "excepcion al tratar de probar los metodos");
+			Log.e(TAG,e.toString());
 		}
-
+		Log.d(TAG+"FINDELAPRUEBAAAAAAAAAAAAAAAAAAAAAAAAA", "fin de la aplicacion");
+		assertEquals(0,0);
 	}
 	
 	
     public void cargartemplates(HomographyMatcher hm2) throws Exception {
-		// TODO Auto-generated method stub
-    	
+
     	ArrayList<Billete> lb= new ArrayList<Billete>();
     	for (EDenominacionBilletes denominacion : EDenominacionBilletes.values()) 
     	{
@@ -141,9 +133,12 @@ public class ProbadorTest extends InstrumentationTestCase {
 			
 			Bitmap bMap0=BitmapFactory.decodeResource(this.getInstrumentation().getTargetContext().getResources(),templateimg(denominacion.value()));
 			Utils.bitmapToMat(bMap0, b.bTemplate.ImagenOriginal);
-			
+	    	bMap0.recycle();
+
 			Bitmap bMap2=BitmapFactory.decodeResource(this.getInstrumentation().getTargetContext().getResources(),maskimg(denominacion.value()));
 		    Utils.bitmapToMat(bMap2, mask);
+	    	bMap2.recycle();
+
 		    Imgproc.cvtColor(mask, mask_gray, Imgproc.COLOR_BGR2GRAY,CvType.CV_8UC1);
 			b.bTemplate.Mascara = mask_gray;
 		    

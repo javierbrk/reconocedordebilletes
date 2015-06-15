@@ -76,12 +76,12 @@ public class Probador {
 			ContenedorEstadistico c = new ContenedorEstadistico();
 			for (int i = 0; i < listadecomparadores.size(); i++) {
 				listadecomparadores.get(i).Inicializar(0); 
-				for (int j = 0; j < listadecarpetasconimagenescorrectas.size(); j++) {
-					
-					path = Environment.getExternalStorageDirectory().toString()+"/Pictures" +listadecarpetasconimagenescorrectas.get(j);
-					probarUnaCarpeta(path, i,true,c);
-					
-				}
+//				for (int j = 0; j < listadecarpetasconimagenescorrectas.size(); j++) {
+//					
+//					path = Environment.getExternalStorageDirectory().toString()+"/Pictures" +listadecarpetasconimagenescorrectas.get(j);
+//					probarUnaCarpeta(path, i,true,c);
+//					
+//				}
 				for (int k = 0; k < listadecarpetasconimagenesincorrectas.size(); k++) {
 					path = Environment.getExternalStorageDirectory().toString()+"/Pictures" +listadecarpetasconimagenesincorrectas.get(k);
 					probarUnaCarpeta(path, i,false,c);
@@ -105,6 +105,7 @@ public class Probador {
 		    if(bMap!=null)
 			{
 		    	Utils.bitmapToMat(bMap, imagen);
+		    	bMap.recycle();
 			    Log.d(TAG+"llenar_templates", "paso 3");
 			    Probar(imagen,this.denominacionAprobar, expectedfoldervalue,listadecomparadores.get(i),c);
 		    }
@@ -117,7 +118,9 @@ public class Probador {
 		List<EscenaProcesada> lista;
 		try {
 			lista = matcher.ProcesarImagen(imagen);
+			imagen.release();
 			for (EscenaProcesada escenaProcesada : lista) {
+				Log.d(TAG+"  -   estadisticas - ",c.toString());
 				if(escenaProcesada.Contraparete.denominacion==ExpectedValue)
 				{
 					if(escenaProcesada.correspondencia)
@@ -140,16 +143,16 @@ public class Probador {
 						c.incCorrectos(escenaProcesada.tiempoDeProcesamiento);
 					}
 				}
+				escenaProcesada.finalize();
 			}
+			
 		} 
 		catch (NotEnougthKeypoints e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.e(TAG, e.getMessage() + e.getStackTrace());
 		}
 		catch (Exception ex) {
-			// TODO Auto-generated catch block
 			ex.printStackTrace();
 			Log.e(TAG, ex.getMessage() + ex.getStackTrace());
 		}

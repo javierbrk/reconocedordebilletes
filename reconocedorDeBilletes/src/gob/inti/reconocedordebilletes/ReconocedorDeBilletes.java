@@ -11,8 +11,6 @@ import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
 import org.opencv.features2d.DMatch;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.android.CameraBridgeViewBase;
@@ -83,7 +81,6 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     }
 
     public void cargartemplates(HomographyMatcher hm2) throws NotEnougthKeypoints {
-		// TODO Auto-generated method stub
     	ArrayList<Billete> lb= new ArrayList<Billete>();
     	for (EDenominacionBilletes denominacion : EDenominacionBilletes.values()) 
     	{
@@ -93,9 +90,12 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 			
 			Bitmap bMap0=BitmapFactory.decodeResource(getResources(),templateimg(denominacion.value()));
 			Utils.bitmapToMat(bMap0, b.bTemplate.ImagenOriginal);
-			
+	    	bMap0.recycle();
+
 			Bitmap bMap2=BitmapFactory.decodeResource(getResources(),maskimg(denominacion.value()));
 		    Utils.bitmapToMat(bMap2, mask);
+	    	bMap2.recycle();
+		    //TODO: es necesario ? probar sacar este preprocesamiento
 		    Imgproc.cvtColor(mask, mask_gray, Imgproc.COLOR_BGR2GRAY,CvType.CV_8UC1);
 			b.bTemplate.Mascara = mask_gray;
 		    
@@ -111,7 +111,6 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     {
         super.onPause();
         if (mOpenCvCameraView != null)
-        	
             mOpenCvCameraView.disableView();
     }
 
@@ -119,7 +118,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     public void onResume()
     {
         super.onResume();
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);
+        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_8, this, mLoaderCallback);
     }
 
     public void onDestroy() {
@@ -169,9 +168,7 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-        
-        ////software
-    	
+        	
     	mCount++;
     	if(mCount == 5)
     	{
@@ -182,7 +179,6 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 	        try {
 				cargartemplates(hm);
 			} catch (NotEnougthKeypoints e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     	}
@@ -197,7 +193,6 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
 					}
 				}
 			} catch (NotEnougthKeypoints e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     		
@@ -208,33 +203,35 @@ public class ReconocedorDeBilletes extends Activity implements CvCameraViewListe
     	}
         
     }
+
+    //TODO reescribir como preprocess
     
-    private void paper_dolar(Mat scene,Mat template){
-    	
-    	Mat g_b_scene=new Mat(), g_b_template=new Mat();
-    	Imgproc.GaussianBlur(scene, g_b_scene, new Size(3,3), 0.2, 0.2, Imgproc.BORDER_DEFAULT);
-	    Imgproc.GaussianBlur(template, g_b_template, new Size(3,3), 0.2, 0.2, Imgproc.BORDER_DEFAULT);
-	    
-	    Mat canny_scene=new Mat(), canny_template=new Mat();
-	    Imgproc.Canny(g_b_scene, canny_scene, 80, 100);
-	    Imgproc.Canny(g_b_template, canny_template, 80, 100);
-	    
-	    Mat element3= new Mat(3,3,CvType.CV_8U,new Scalar(1));
-	    
-	    Imgproc.morphologyEx(canny_scene,scene,Imgproc.MORPH_CLOSE,element3);
-	    Imgproc.morphologyEx(canny_template,template,Imgproc.MORPH_CLOSE,element3);
-    	    
-    }
-    private void paper_euro(Mat scene, Mat template){
-    	
-    	Mat b_f_scene=new Mat(), b_f_template=new Mat();
-    	Imgproc.bilateralFilter(scene, b_f_scene, 3, 75, 75);
-	    Imgproc.bilateralFilter(template, b_f_template, 3, 75, 75);
-    	
-	    Imgproc.equalizeHist(b_f_scene,scene);
-	    Imgproc.equalizeHist(b_f_template,template);
-	    
-    }
+//    private void paper_dolar(Mat scene,Mat template){
+//    	
+//    	Mat g_b_scene=new Mat(), g_b_template=new Mat();
+//    	Imgproc.GaussianBlur(scene, g_b_scene, new Size(3,3), 0.2, 0.2, Imgproc.BORDER_DEFAULT);
+//	    Imgproc.GaussianBlur(template, g_b_template, new Size(3,3), 0.2, 0.2, Imgproc.BORDER_DEFAULT);
+//	    
+//	    Mat canny_scene=new Mat(), canny_template=new Mat();
+//	    Imgproc.Canny(g_b_scene, canny_scene, 80, 100);
+//	    Imgproc.Canny(g_b_template, canny_template, 80, 100);
+//	    
+//	    Mat element3= new Mat(3,3,CvType.CV_8U,new Scalar(1));
+//	    
+//	    Imgproc.morphologyEx(canny_scene,scene,Imgproc.MORPH_CLOSE,element3);
+//	    Imgproc.morphologyEx(canny_template,template,Imgproc.MORPH_CLOSE,element3);
+//    	    
+//    }
+//    private void paper_euro(Mat scene, Mat template){
+//    	
+//    	Mat b_f_scene=new Mat(), b_f_template=new Mat();
+//    	Imgproc.bilateralFilter(scene, b_f_scene, 3, 75, 75);
+//	    Imgproc.bilateralFilter(template, b_f_template, 3, 75, 75);
+//    	
+//	    Imgproc.equalizeHist(b_f_scene,scene);
+//	    Imgproc.equalizeHist(b_f_template,template);
+//	    
+//    }
     
 
     public static int templateimg(int idpesos){

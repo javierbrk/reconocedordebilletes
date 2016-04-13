@@ -1,6 +1,8 @@
 # reconocedordebilletes
 Reconocedor de denominación de billetes para personas en situacion de discapaciad visual.
 
+
+
 Creemos importante que este proyecto sea un proyecto de código abierto y disponible para todos, es por ello que nos interesa de sobremanera que se puedan sumar todos los que quieran participar.
  
 Actualmente contamos con un prototipo funcionando en una tablet y en un teléfono de gama media con android 4.2.

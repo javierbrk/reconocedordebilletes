@@ -35,6 +35,7 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.hardware.Camera.Size;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -57,6 +58,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     private static final int Metodo = 8;//0 usa todos los goodmatches, 8 RANSAC usa solo los que cumplen la reprojecccion a una distancia menor de una cota
     private static final double CotaRansac = 10;//cota de RANSAC desde 1 a 10 pixels generalmente
     private static final boolean Debug = false;
+    
+    
     
     private ReconView mOpenCvCameraView;
     private List<Size> mResolutionList;
@@ -100,7 +103,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     		R.raw.cienpesos,
     		R.raw.cienpesos,
     		R.raw.cienpesos,
-    		R.raw.cienpesos};
+    		R.raw.cienpesos
+    		};
     
     private boolean touched=false;
     private Mat srcRGBA;
@@ -163,6 +167,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 
         mOpenCvCameraView.setCvCameraViewListener(this);
         
+        
        
        
     }
@@ -190,6 +195,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     }
 
     public void onCameraViewStarted(int width, int height) {
+    	mOpenCvCameraView.setFlashOn();
     }
 
     public void onCameraViewStopped() {
@@ -199,15 +205,27 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     	 //Mat rgba = inputFrame.gray();
     	String resf="";
     	String resd="";
+    	MediaPlayer mPlayer;
     	Mat rgba=new Mat();
     	org.opencv.core.Size dzise=new org.opencv.core.Size(Ancho,Alto);
     	Imgproc.resize(inputFrame.gray(),rgba,dzise);
          if ( touched ) {
         	 Escena_actual=new Billete(ReconActivity.this, rgba, rgba, ID_Denominacion[0]);
-        	        	 
-        	 resf=reconocerFrentes();
-        	 resd=reconocerDorsos();
-        	         	 
+        	 
+        	 if (Escena_actual.getDFrente().empty() == false) {
+        		 resf=reconocerFrentes();
+        	 }
+        	 
+        	 if (Escena_actual.getDDorso().empty() == false) {
+        		 resd=reconocerDorsos();
+        	 }
+        	 
+        	      
+        	 if (resf == "" && resd == ""){
+        		 mPlayer = MediaPlayer.create(ReconActivity.this, R.raw.nonbillete);
+        		 mPlayer.start();
+        		 
+        	 }
         	 touched = false;
          }
          return inputFrame.rgba();
@@ -244,13 +262,6 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 			Log.d("Frente", "goog_matches:"+good_matches.size());			
 			goodMatches = new MatOfDMatch();
 			goodMatches.fromList(good_matches);
-
-			Mat outImg=new Mat();
-			MatOfByte drawnMatches = new MatOfByte();
-			Features2d.drawMatches(billetes.get(j).getDorso(), billetes.get(j).getKDorso(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-	        String currentDateandTime = sdf.format(new Date());
-	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
 			
 			if(good_matches.size()>Ngoodmatches){
 				
@@ -293,12 +304,22 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 				Point punto_B= new Point(scene_corners.get(1,0));
 				Point punto_C= new Point(scene_corners.get(2,0));
 				Point punto_D= new Point(scene_corners.get(3,0));
-
+				
+				Mat outImg=new Mat();
+				MatOfByte drawnMatches = new MatOfByte();
+				Features2d.drawMatches(billetes.get(j).getDorso(), billetes.get(j).getKDorso(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
+				
 				Core.line(outImg, punto_A, punto_B, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_B, punto_C, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_C, punto_D, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_D, punto_A, new Scalar(0, 255, 0),4);
-
+		    					
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		        String currentDateandTime = sdf.format(new Date());
+		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
+				
+				SaveImage(outImg,fileName);
+				
 					    	    
 				distancia_AB=distancia(punto_A,punto_B);
 				distancia_AC=distancia(punto_A,punto_C);
@@ -320,8 +341,17 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 					billetes.get(j).play();
 					res=res+j+" ";
 				}
-			}
-			SaveImage(outImg,fileName);
+					
+						
+			}else{
+				Mat outImg=new Mat();
+				MatOfByte drawnMatches = new MatOfByte();
+				Features2d.drawMatches(billetes.get(j).getDorso(), billetes.get(j).getKDorso(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		        String currentDateandTime = sdf.format(new Date());
+		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
+				SaveImage(outImg,fileName);
+			}	
 		}
 		return res;
 	}
@@ -345,6 +375,13 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 		Log.d("Frente", "billetes:"+billetes.size());
 		for(int j=0; j<billetes.size();j++){
 			matches = new ArrayList<MatOfDMatch>();
+			
+			//For debug
+			Mat test = Escena_actual.getDFrente();
+			boolean foo = test.empty();
+			Log.d("Descriptors_empty", ""+foo);	
+			
+			
 			matcher.knnMatch(billetes.get(j).getDFrente(), Escena_actual.getDFrente(), matches, 2);
 		   
 			good_matches=new ArrayList<DMatch>();
@@ -356,13 +393,6 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 			Log.d("Frente", "goog_matches:"+good_matches.size());			
 			goodMatches = new MatOfDMatch();
 			goodMatches.fromList(good_matches);
-
-			Mat outImg=new Mat();
-			MatOfByte drawnMatches = new MatOfByte();
-			Features2d.drawMatches(billetes.get(j).getFrente(), billetes.get(j).getKFrente(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-	        String currentDateandTime = sdf.format(new Date());
-	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";			
 			
 			if(good_matches.size()>Ngoodmatches){
 				
@@ -371,6 +401,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 				keypoints_sceneList = new ArrayList<KeyPoint>();
 				keypoints_objectList = billetes.get(j).getKFrente().toList();
 				keypoints_sceneList = Escena_actual.getKFrente().toList();
+				
 		
 				objList = new LinkedList<Point>();
 				sceneList = new LinkedList<Point>();
@@ -406,11 +437,22 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 				Point punto_C= new Point(scene_corners.get(2,0));
 				Point punto_D= new Point(scene_corners.get(3,0));
 				
+				Mat outImg=new Mat();
+				MatOfByte drawnMatches = new MatOfByte();
+				Features2d.drawMatches(billetes.get(j).getFrente(), billetes.get(j).getKFrente(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
+				
 				Core.line(outImg, punto_A, punto_B, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_B, punto_C, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_C, punto_D, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_D, punto_A, new Scalar(0, 255, 0),4);
 		    					
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		        String currentDateandTime = sdf.format(new Date());
+		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
+				
+				SaveImage(outImg,fileName);
+				
+					    	    
 				distancia_AB=distancia(punto_A,punto_B);
 				distancia_AC=distancia(punto_A,punto_C);
 				distancia_AD=distancia(punto_A,punto_D);
@@ -430,9 +472,17 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 					//Encontre un billete
 					billetes.get(j).play();
 					res=res+j+" ";
-				}
-			}
-			SaveImage(outImg,fileName);
+				}					
+						
+			}else{
+				Mat outImg=new Mat();
+				MatOfByte drawnMatches = new MatOfByte();
+				Features2d.drawMatches(billetes.get(j).getFrente(), billetes.get(j).getKFrente(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		        String currentDateandTime = sdf.format(new Date());
+		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
+				SaveImage(outImg,fileName);
+			}	
 		}
 		return res;
 	}

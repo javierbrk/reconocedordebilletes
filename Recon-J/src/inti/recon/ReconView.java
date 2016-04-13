@@ -7,6 +7,7 @@ import org.opencv.android.JavaCameraView;
 
 import android.content.Context;
 import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.Size;
 import android.util.AttributeSet;
@@ -24,6 +25,7 @@ public class ReconView extends JavaCameraView implements PictureCallback {
     public List<String> getEffectList() {
         return mCamera.getParameters().getSupportedColorEffects();
     }
+   
 
     public boolean isEffectSupported() {
         return (mCamera.getParameters().getColorEffect() != null);
@@ -53,7 +55,14 @@ public class ReconView extends JavaCameraView implements PictureCallback {
     public Size getResolution() {
         return mCamera.getParameters().getPreviewSize();
     }
+    
+    public void setFlashOn() {
+    	Camera.Parameters params = mCamera.getParameters();
+    	params.setFlashMode(Parameters.FLASH_MODE_ON);
+    	mCamera.setParameters(params);
+    }
 
+    
     public void takePicture(final String fileName) {
         Log.i(TAG, "Taking picture");
         this.mPictureFileName = fileName;
@@ -64,7 +73,8 @@ public class ReconView extends JavaCameraView implements PictureCallback {
         // PictureCallback is implemented by the current class
         mCamera.takePicture(null, null, this);
     }
-
+    
+    
     @Override
     public void onPictureTaken(byte[] data, Camera camera) {
         Log.i(TAG, "Saving a bitmap to file");

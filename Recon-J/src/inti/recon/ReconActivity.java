@@ -58,8 +58,6 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     private static final double CotaRansac = 10;//cota de RANSAC desde 1 a 10 pixels generalmente
     private static final boolean Debug = false;
     
-    
-    
     private ReconView mOpenCvCameraView;
     private List<Size> mResolutionList;
     private MenuItem[] mEffectMenuItems;
@@ -253,7 +251,6 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 	        String currentDateandTime = sdf.format(new Date());
 	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
-			SaveImage(outImg,fileName);
 			
 			if(good_matches.size()>Ngoodmatches){
 				
@@ -323,7 +320,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 					billetes.get(j).play();
 					res=res+j+" ";
 				}
-			}	
+			}
+			SaveImage(outImg,fileName);
 		}
 		return res;
 	}
@@ -364,9 +362,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 			Features2d.drawMatches(billetes.get(j).getFrente(), billetes.get(j).getKFrente(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 	        String currentDateandTime = sdf.format(new Date());
-	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
-			SaveImage(outImg,fileName);
-			
+	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";			
 			
 			if(good_matches.size()>Ngoodmatches){
 				
@@ -435,7 +431,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 					billetes.get(j).play();
 					res=res+j+" ";
 				}
-			}	
+			}
+			SaveImage(outImg,fileName);
 		}
 		return res;
 	}

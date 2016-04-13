@@ -58,8 +58,6 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     private static final double CotaRansac = 10;//cota de RANSAC desde 1 a 10 pixels generalmente
     private static final boolean Debug = false;
     
-    
-    
     private ReconView mOpenCvCameraView;
     private List<Size> mResolutionList;
     private MenuItem[] mEffectMenuItems;
@@ -246,6 +244,13 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 			Log.d("Frente", "goog_matches:"+good_matches.size());			
 			goodMatches = new MatOfDMatch();
 			goodMatches.fromList(good_matches);
+
+			Mat outImg=new Mat();
+			MatOfByte drawnMatches = new MatOfByte();
+			Features2d.drawMatches(billetes.get(j).getDorso(), billetes.get(j).getKDorso(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+	        String currentDateandTime = sdf.format(new Date());
+	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
 			
 			if(good_matches.size()>Ngoodmatches){
 				
@@ -288,22 +293,12 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 				Point punto_B= new Point(scene_corners.get(1,0));
 				Point punto_C= new Point(scene_corners.get(2,0));
 				Point punto_D= new Point(scene_corners.get(3,0));
-				
-				Mat outImg=new Mat();
-				MatOfByte drawnMatches = new MatOfByte();
-				Features2d.drawMatches(billetes.get(j).getDorso(), billetes.get(j).getKDorso(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
-				
+
 				Core.line(outImg, punto_A, punto_B, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_B, punto_C, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_C, punto_D, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_D, punto_A, new Scalar(0, 255, 0),4);
-		    					
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-		        String currentDateandTime = sdf.format(new Date());
-		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
-				
-				SaveImage(outImg,fileName);
-				
+
 					    	    
 				distancia_AB=distancia(punto_A,punto_B);
 				distancia_AC=distancia(punto_A,punto_C);
@@ -325,17 +320,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 					billetes.get(j).play();
 					res=res+j+" ";
 				}
-					
-						
-			}else{
-				Mat outImg=new Mat();
-				MatOfByte drawnMatches = new MatOfByte();
-				Features2d.drawMatches(billetes.get(j).getDorso(), billetes.get(j).getKDorso(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-		        String currentDateandTime = sdf.format(new Date());
-		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
-				SaveImage(outImg,fileName);
-			}	
+			}
+			SaveImage(outImg,fileName);
 		}
 		return res;
 	}
@@ -370,6 +356,13 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 			Log.d("Frente", "goog_matches:"+good_matches.size());			
 			goodMatches = new MatOfDMatch();
 			goodMatches.fromList(good_matches);
+
+			Mat outImg=new Mat();
+			MatOfByte drawnMatches = new MatOfByte();
+			Features2d.drawMatches(billetes.get(j).getFrente(), billetes.get(j).getKFrente(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+	        String currentDateandTime = sdf.format(new Date());
+	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";			
 			
 			if(good_matches.size()>Ngoodmatches){
 				
@@ -413,22 +406,11 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 				Point punto_C= new Point(scene_corners.get(2,0));
 				Point punto_D= new Point(scene_corners.get(3,0));
 				
-				Mat outImg=new Mat();
-				MatOfByte drawnMatches = new MatOfByte();
-				Features2d.drawMatches(billetes.get(j).getFrente(), billetes.get(j).getKFrente(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
-				
 				Core.line(outImg, punto_A, punto_B, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_B, punto_C, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_C, punto_D, new Scalar(0, 255, 0),4);
 				Core.line(outImg, punto_D, punto_A, new Scalar(0, 255, 0),4);
 		    					
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-		        String currentDateandTime = sdf.format(new Date());
-		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
-				
-				SaveImage(outImg,fileName);
-				
-					    	    
 				distancia_AB=distancia(punto_A,punto_B);
 				distancia_AC=distancia(punto_A,punto_C);
 				distancia_AD=distancia(punto_A,punto_D);
@@ -449,17 +431,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 					billetes.get(j).play();
 					res=res+j+" ";
 				}
-					
-						
-			}else{
-				Mat outImg=new Mat();
-				MatOfByte drawnMatches = new MatOfByte();
-				Features2d.drawMatches(billetes.get(j).getFrente(), billetes.get(j).getKFrente(), Escena_actual.getFrente(), Escena_actual.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-		        String currentDateandTime = sdf.format(new Date());
-		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
-				SaveImage(outImg,fileName);
-			}	
+			}
+			SaveImage(outImg,fileName);
 		}
 		return res;
 	}

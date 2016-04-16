@@ -38,6 +38,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     public static final int Ancho = 800;
     public static final int Alto = 600;
     
+    
+    
     private ReconView mOpenCvCameraView;
     private List<Size> mResolutionList;
     private MenuItem[] mEffectMenuItems;
@@ -80,7 +82,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     		R.raw.cienpesos,
     		R.raw.cienpesos,
     		R.raw.cienpesos,
-    		R.raw.cienpesos};
+    		R.raw.cienpesos
+    		};
     
     private boolean touched=false;
     private Mat srcRGBA;
@@ -143,6 +146,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 
         mOpenCvCameraView.setCvCameraViewListener(this);
         
+        
        
        
     }
@@ -170,6 +174,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     }
 
     public void onCameraViewStarted(int width, int height) {
+    	mOpenCvCameraView.setFlashOn();
     }
 
     public void onCameraViewStopped() {
@@ -186,16 +191,12 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         	 BillSearch bs = new SimpleBillSearch();
         	 bs.search(Escena_actual, billetes);
         	         	 
+
         	 touched = false;
          }
          return inputFrame.rgba();
          
     }
-    
-    
-    
-
-
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

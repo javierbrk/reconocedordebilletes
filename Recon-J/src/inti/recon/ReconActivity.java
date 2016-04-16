@@ -21,7 +21,6 @@ import org.opencv.imgproc.Imgproc;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.hardware.Camera.Size;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;

@@ -30,7 +30,6 @@ https://www.inti.gob.ar/tecnointi/pdf/TecnoINTI2015.pdf pg 396#
 
 De acuerdo a lo discutido y expresado en múltiples oportunidades no se realizaran publicaciones de tipo difusión/divulgación hasta no contar con pruebas reales de personas con problemas de visión.
 
-
 ##Referencias
 
 Procesamiento de imagenes en general http://szeliski.org/Book/drafts/SzeliskiBook_20100903_draft.pdf

@@ -23,7 +23,6 @@ import org.opencv.features2d.KeyPoint;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
-import android.annotation.SuppressLint;
 import android.os.Environment;
 import android.util.Log;
 
@@ -48,7 +47,6 @@ public class SimpleBillSearch implements BillSearch {
    	 return null;
 	}
 	
-	@SuppressLint("SimpleDateFormat")
 	private String reconocerDorsos(Billete needle, List<Billete> haystack) {
 		String res="";
     	DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
@@ -163,7 +161,7 @@ public class SimpleBillSearch implements BillSearch {
 	}
 
 	
-	@SuppressLint("SimpleDateFormat") public String reconocerFrentes(Billete needle, List<Billete> haystack) {
+	public String reconocerFrentes(Billete needle, List<Billete> haystack) {
     	String res="";    	
 		DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
 		List<MatOfDMatch> matches;

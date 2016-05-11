@@ -53,6 +53,8 @@ public class ReconView extends JavaCameraView implements PictureCallback {
     public Size getResolution() {
         return mCamera.getParameters().getPreviewSize();
     }
+    
+   
 
     public void takePicture(final String fileName) {
         Log.i(TAG, "Taking picture");

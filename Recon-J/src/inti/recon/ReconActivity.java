@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
@@ -22,6 +23,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +43,10 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     private ReconView mOpenCvCameraView;
     private List<Size> mResolutionList;
     private MenuItem[] mEffectMenuItems;
+    private MenuItem[] mVelocidadMenuItems;
     private SubMenu mColorEffectsMenu;
+    private SubMenu mVelocidadMenu;
+    
     private MenuItem[] mResolutionMenuItems;
     private SubMenu mResolutionMenu;
     public Billete Escena_actual;
@@ -62,30 +67,15 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     		R.raw.cienp,
     		R.raw.cienpd,
     		R.raw.cienevp,
-    		R.raw.cienevpd};
-    private int[] ID_Denominacion={
-    		R.raw.dospesos,
-    		R.raw.dospesos,
-    		R.raw.cincopesos,
-    		R.raw.cincopesos,
-    		R.raw.diezpesos,
-    		R.raw.diezpesos,
-    		R.raw.veintepesos,
-    		R.raw.veintepesos,
-    		R.raw.cincuentapesos,
-    		R.raw.cincuentapesos,
-    		R.raw.cincuentapesos,
-    		R.raw.cincuentapesos,
-    		R.raw.cienpesos,
-    		R.raw.cienpesos,
-    		R.raw.cienpesos,
-    		R.raw.cienpesos,
-    		R.raw.cienpesos};
-    
+    		R.raw.cienevpd,
+    		R.raw.cinconp,
+    		R.raw.cinconpd};
+        
     private boolean touched=false;
     private Mat srcRGBA;
     private Mat srcRGBA2;
     
+    TextToSpeech t1;
     	
     @SuppressLint("ClickableViewAccessibility") private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -114,7 +104,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
                     Imgproc.cvtColor(Utils.loadResource(ReconActivity.this, ID_Templates[i]), srcRGBA, Imgproc.COLOR_BGR2GRAY);
                     srcRGBA2 = new Mat(); //RGBA format
                     Imgproc.cvtColor(Utils.loadResource(ReconActivity.this, ID_Templates[i+1]), srcRGBA2, Imgproc.COLOR_BGR2GRAY);
-                    billetes.add(new Billete(ReconActivity.this,srcRGBA,srcRGBA2,ID_Denominacion[i]));
+                    billetes.add(new Billete(ReconActivity.this,srcRGBA,srcRGBA2));
                     
 	                
 	            } catch (IOException e) {
@@ -143,14 +133,28 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 
         mOpenCvCameraView.setCvCameraViewListener(this);
         
-       
+        t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+               if(status != TextToSpeech.ERROR) {
+            	   Locale locSpanish = new Locale("spa", "ESP");
+            	   t1.setLanguage(locSpanish);
+               }
+            }
+         });
+        
+    	
        
     }
 
     @Override
     public void onPause()
     {
-        super.onPause();
+    	if(t1 !=null){
+            t1.stop();
+            t1.shutdown();
+         }
+    	super.onPause();
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();
     }
@@ -170,6 +174,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     }
 
     public void onCameraViewStarted(int width, int height) {
+    	t1.speak("Bienvenido a Recon. Toque la pantalla para comenzar el reconocimiento.", TextToSpeech.QUEUE_FLUSH, null);  	
     }
 
     public void onCameraViewStopped() {
@@ -178,14 +183,18 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
 
     	Mat rgba=new Mat();
+    	
     	org.opencv.core.Size dzise=new org.opencv.core.Size(Ancho,Alto);
     	Imgproc.resize(inputFrame.gray(),rgba,dzise);
          if ( touched ) {
-        	 Escena_actual = new Billete(ReconActivity.this, rgba, rgba, ID_Denominacion[0]);
+        	
+        	 Escena_actual = new Billete(ReconActivity.this, rgba, rgba );
         	 
         	 BillSearch bs = new SimpleBillSearch();
-        	 bs.search(Escena_actual, billetes);
-        	         	 
+        	 String toSpeak=texto(bs.search(Escena_actual, billetes));
+        	 //Toast.makeText(this, toSpeak, Toast.LENGTH_SHORT).show();
+        	 
+        	 t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);        	 
         	 touched = false;
          }
          return inputFrame.rgba();
@@ -199,6 +208,22 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        List<String> velocidad=new ArrayList<String>();
+        velocidad.add("1.0x");
+        velocidad.add("2.0x");
+        mVelocidadMenu = menu.addSubMenu("Velocidad Vos");
+        mVelocidadMenuItems = new MenuItem[velocidad.size()];
+
+        int idx = 0;
+        ListIterator<String> veloItr = velocidad.listIterator();
+        while(veloItr.hasNext()) {
+           String element = veloItr.next();
+           mVelocidadMenuItems[idx] = mVelocidadMenu.add(1, idx, Menu.NONE, element);
+           idx++;
+        }
+        
+        
+		
         List<String> effects = mOpenCvCameraView.getEffectList();
 
         if (effects == null) {
@@ -209,11 +234,11 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         mColorEffectsMenu = menu.addSubMenu("Color Effect");
         mEffectMenuItems = new MenuItem[effects.size()];
 
-        int idx = 0;
+        idx = 0;
         ListIterator<String> effectItr = effects.listIterator();
         while(effectItr.hasNext()) {
            String element = effectItr.next();
-           mEffectMenuItems[idx] = mColorEffectsMenu.add(1, idx, Menu.NONE, element);
+           mEffectMenuItems[idx] = mColorEffectsMenu.add(2, idx, Menu.NONE, element);
            idx++;
         }
 
@@ -225,7 +250,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         idx = 0;
         while(resolutionItr.hasNext()) {
             Size element = resolutionItr.next();
-            mResolutionMenuItems[idx] = mResolutionMenu.add(2, idx, Menu.NONE,
+            mResolutionMenuItems[idx] = mResolutionMenu.add(3, idx, Menu.NONE,
                     Integer.valueOf(element.width).toString() + "x" + Integer.valueOf(element.height).toString());
             idx++;
          }
@@ -236,10 +261,22 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         Log.i(TAG, "called onOptionsItemSelected; selected item: " + item);
         if (item.getGroupId() == 1)
         {
+        	if(item.getItemId()==0)
+        	{
+        		t1.setSpeechRate(1);
+        	}else if(item.getItemId()==1){
+        		t1.setSpeechRate(2);
+        	}	
+        		
+        	
+            //Toast.makeText(this, mOpenCvCameraView.getEffect(), Toast.LENGTH_SHORT).show();
+        }
+        else if (item.getGroupId() == 2)
+        {
             mOpenCvCameraView.setEffect((String) item.getTitle());
             Toast.makeText(this, mOpenCvCameraView.getEffect(), Toast.LENGTH_SHORT).show();
         }
-        else if (item.getGroupId() == 2)
+        else if (item.getGroupId() == 3)
         {
             int id = item.getItemId();
             Size resolution = mResolutionList.get(id);
@@ -260,7 +297,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         //String fileName = Environment.getExternalStorageDirectory().getPath() +
         // "/sample_picture_" + currentDateandTime + ".jpg";
         //mOpenCvCameraView.takePicture(fileName);
-        Toast.makeText(this, "Calculando...", Toast.LENGTH_SHORT).show();
+        t1.speak("Calculando...", TextToSpeech.QUEUE_FLUSH, null);
+        //Toast.makeText(this, "Calculando...", Toast.LENGTH_SHORT).show();
         
         touched = true;
         return false;
@@ -268,4 +306,33 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     public List<Billete> getBilletes(){
     	return billetes;
     }
+    public String texto(String in){
+    	String out="";
+    	if(in.equalsIgnoreCase("0 ")){
+    		out ="Dos pesos.";
+    	}
+    	else if(in.equalsIgnoreCase("1 ")|| in.equalsIgnoreCase("8 ")){
+    		out ="Cinco pesos.";
+    	}
+  
+      	else if(in.equalsIgnoreCase("2 ")){
+    		out ="Diez pesos.";
+    	}
+      	else if(in.equalsIgnoreCase("3 ")){
+    		out ="Veinte pesos.";
+    	}
+      	else if(in.equalsIgnoreCase("4 ") || in.equalsIgnoreCase("5 ")){
+    		out ="Cincuenta pesos.";
+    	}
+      	else if(in.equalsIgnoreCase("6 ") || in.equalsIgnoreCase("7 ")){
+    		out ="Cien pesos.";
+    	}
+      	
+      	else{
+    		out ="Lo siento no he encontrado ningún billete. Intente nuevamente.";
+    	}
+  
+    	return out;
+    }
+    
 }

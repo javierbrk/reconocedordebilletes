@@ -30,11 +30,13 @@ import android.util.Log;
 public class SimpleBillSearch implements BillSearch {
     private static final String TAG = "OCVSample::Activity";
     private static final double Pdistancia = 0.7;
-    private static final int Ngoodmatches = 3;
+    private static final int Ngoodmatches = 3,Nfeatures=3;
     private static final int Metodo = 8;//0 usa todos los goodmatches, 8 RANSAC usa solo los que cumplen la reprojecccion a una distancia menor de una cota
     private static final double CotaRansac = 10;//cota de RANSAC desde 1 a 10 pixels generalmente
     private static final boolean Debug = false;
 	
+    
+    
 	@Override
 	public String search(Billete needle, List<Billete> haystack) {
    	 String resf=reconocerFrentes(needle, haystack);
@@ -42,11 +44,7 @@ public class SimpleBillSearch implements BillSearch {
    	 
    	 return resf + resd;
 	}
-
-	@Override
-	public String search(BillImage needle, List<Bill> haystack) {
-   	 return null;
-	}
+	
 	
 	@SuppressLint("SimpleDateFormat")
 	private String reconocerDorsos(Billete needle, List<Billete> haystack) {
@@ -67,97 +65,101 @@ public class SimpleBillSearch implements BillSearch {
 		double angulo_A,angulo_B,angulo_C,angulo_D;
 		
 		Log.d("Frente", "billetes:"+haystack.size());
-		for(int j=0; j<haystack.size();j++){
-			matches = new ArrayList<MatOfDMatch>();
-			matcher.knnMatch(haystack.get(j).getDDorso(), needle.getDFrente(), matches, 2);
-		   
-			good_matches=new ArrayList<DMatch>();
-			for(int i=0;i<matches.size();i++){
-						
-				if(matches.get(i).toList().get(0).distance < Pdistancia*matches.get(i).toList().get(1).distance)
-					good_matches.add(matches.get(i).toList().get(0));
-			}
-			Log.d("Frente", "goog_matches:"+good_matches.size());			
-			goodMatches = new MatOfDMatch();
-			goodMatches.fromList(good_matches);
-
-			Mat outImg=new Mat();
-			MatOfByte drawnMatches = new MatOfByte();
-			Features2d.drawMatches(haystack.get(j).getDorso(), haystack.get(j).getKDorso(), needle.getFrente(), needle.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-	        String currentDateandTime = sdf.format(new Date());
-	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
+		if(needle.getKFrente().toList().size()>Nfeatures){
 			
-			if(good_matches.size()>Ngoodmatches){
+			for(int j=0; j<haystack.size();j++){
 				
-				
-				keypoints_objectList = new ArrayList<KeyPoint>();
-				keypoints_sceneList = new ArrayList<KeyPoint>();
-				keypoints_objectList = haystack.get(j).getKDorso().toList();
-				keypoints_sceneList = needle.getKFrente().toList();
-		
-				objList = new LinkedList<Point>();
-				sceneList = new LinkedList<Point>();
-				for(int i = 0; i<good_matches.size(); i++){
-				    objList.addLast(keypoints_objectList.get(good_matches.get(i).queryIdx).pt);
-				    sceneList.addLast(keypoints_sceneList.get(good_matches.get(i).trainIdx).pt);
+				matches = new ArrayList<MatOfDMatch>();
+				matcher.knnMatch(haystack.get(j).getDDorso(), needle.getDFrente(), matches, 2);
+			   
+				good_matches=new ArrayList<DMatch>();
+				for(int i=0;i<matches.size();i++){
+							
+					if(matches.get(i).toList().get(0).distance < Pdistancia*matches.get(i).toList().get(1).distance)
+						good_matches.add(matches.get(i).toList().get(0));
 				}
-				obj = new MatOfPoint2f();
-				sce = new MatOfPoint2f();
-				obj.fromList(objList);
-				sce.fromList(sceneList);
-				
-				Mat hg = Calib3d.findHomography(obj, sce,Metodo,CotaRansac);
-		
-				obj_corners = new Mat(4,1,CvType.CV_32FC2);
-				obj_corners.put(0, 0, new double[] {0,0});
-				obj_corners.put(1, 0, new double[] {haystack.get(j).getDorso().cols(),0});
-				obj_corners.put(2, 0, new double[] {haystack.get(j).getDorso().cols(),haystack.get(j).getDorso().rows()});
-				obj_corners.put(3, 0, new double[] {0,haystack.get(j).getDorso().rows()});
-				
-				scene_corners = new Mat(4,1,CvType.CV_32FC2);
-				Core.perspectiveTransform(obj_corners,scene_corners, hg);
+				Log.d("Frente", "goog_matches:"+good_matches.size());			
+				goodMatches = new MatOfDMatch();
+				goodMatches.fromList(good_matches);
 	
+				Mat outImg=new Mat();
+				MatOfByte drawnMatches = new MatOfByte();
+				Features2d.drawMatches(haystack.get(j).getDorso(), haystack.get(j).getKDorso(), needle.getFrente(), needle.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		        String currentDateandTime = sdf.format(new Date());
+		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";
 				
-				scene_corners.put(0,0,new double[] {scene_corners.get(0,0)[0]+haystack.get(j).getDorso().cols(),scene_corners.get(0,0)[1]});
-		    	scene_corners.put(1,0,new double[] {scene_corners.get(1,0)[0]+haystack.get(j).getDorso().cols(),scene_corners.get(1,0)[1]});
-		    	scene_corners.put(2,0,new double[] {scene_corners.get(2,0)[0]+haystack.get(j).getDorso().cols(),scene_corners.get(2,0)[1]});
-		    	scene_corners.put(3,0,new double[] {scene_corners.get(3,0)[0]+haystack.get(j).getDorso().cols(),scene_corners.get(3,0)[1]});
-		    					
-				
-				Point punto_A= new Point(scene_corners.get(0,0));
-				Point punto_B= new Point(scene_corners.get(1,0));
-				Point punto_C= new Point(scene_corners.get(2,0));
-				Point punto_D= new Point(scene_corners.get(3,0));
-
-				Core.line(outImg, punto_A, punto_B, new Scalar(0, 255, 0),4);
-				Core.line(outImg, punto_B, punto_C, new Scalar(0, 255, 0),4);
-				Core.line(outImg, punto_C, punto_D, new Scalar(0, 255, 0),4);
-				Core.line(outImg, punto_D, punto_A, new Scalar(0, 255, 0),4);
-
-					    	    
-				distancia_AB=distancia(punto_A,punto_B);
-				distancia_AC=distancia(punto_A,punto_C);
-				distancia_AD=distancia(punto_A,punto_D);
+		        if(good_matches.size()>Ngoodmatches){
+					
+					
+					keypoints_objectList = new ArrayList<KeyPoint>();
+					keypoints_sceneList = new ArrayList<KeyPoint>();
+					keypoints_objectList = haystack.get(j).getKDorso().toList();
+					keypoints_sceneList = needle.getKFrente().toList();
+			
+					objList = new LinkedList<Point>();
+					sceneList = new LinkedList<Point>();
+					for(int i = 0; i<good_matches.size(); i++){
+					    objList.addLast(keypoints_objectList.get(good_matches.get(i).queryIdx).pt);
+					    sceneList.addLast(keypoints_sceneList.get(good_matches.get(i).trainIdx).pt);
+					}
+					obj = new MatOfPoint2f();
+					sce = new MatOfPoint2f();
+					obj.fromList(objList);
+					sce.fromList(sceneList);
+					
+					Mat hg = Calib3d.findHomography(obj, sce,Metodo,CotaRansac);
+			
+					obj_corners = new Mat(4,1,CvType.CV_32FC2);
+					obj_corners.put(0, 0, new double[] {0,0});
+					obj_corners.put(1, 0, new double[] {haystack.get(j).getDorso().cols(),0});
+					obj_corners.put(2, 0, new double[] {haystack.get(j).getDorso().cols(),haystack.get(j).getDorso().rows()});
+					obj_corners.put(3, 0, new double[] {0,haystack.get(j).getDorso().rows()});
+					
+					scene_corners = new Mat(4,1,CvType.CV_32FC2);
+					Core.perspectiveTransform(obj_corners,scene_corners, hg);
 		
-				angulo_A=angulo(punto_A, punto_D,punto_B);
-				angulo_B=angulo(punto_B, punto_A,punto_C);
-				angulo_C=angulo(punto_C, punto_B,punto_D);
-				angulo_D=angulo(punto_D, punto_C,punto_A);
-				
-				if((angulo_A < (3.1415 - 0.35)) && (angulo_A > 0.35) && 
-						(angulo_B < (3.1415 - 0.35)) && (angulo_B > 0.35) &&
-						(angulo_C < (3.1415 - 0.35)) && (angulo_C > 0.35) &&
-						(angulo_D < (3.1415 - 0.35)) && (angulo_D > 0.35) && 
-						distancia_AB > 100 && distancia_AC > 120 && distancia_AD > 50
-						)
-				{
-					//Encontre un billete
-					haystack.get(j).play();
-					res=res+j+" ";
+					
+					scene_corners.put(0,0,new double[] {scene_corners.get(0,0)[0]+haystack.get(j).getDorso().cols(),scene_corners.get(0,0)[1]});
+			    	scene_corners.put(1,0,new double[] {scene_corners.get(1,0)[0]+haystack.get(j).getDorso().cols(),scene_corners.get(1,0)[1]});
+			    	scene_corners.put(2,0,new double[] {scene_corners.get(2,0)[0]+haystack.get(j).getDorso().cols(),scene_corners.get(2,0)[1]});
+			    	scene_corners.put(3,0,new double[] {scene_corners.get(3,0)[0]+haystack.get(j).getDorso().cols(),scene_corners.get(3,0)[1]});
+			    					
+					
+					Point punto_A= new Point(scene_corners.get(0,0));
+					Point punto_B= new Point(scene_corners.get(1,0));
+					Point punto_C= new Point(scene_corners.get(2,0));
+					Point punto_D= new Point(scene_corners.get(3,0));
+	
+					Core.line(outImg, punto_A, punto_B, new Scalar(0, 255, 0),4);
+					Core.line(outImg, punto_B, punto_C, new Scalar(0, 255, 0),4);
+					Core.line(outImg, punto_C, punto_D, new Scalar(0, 255, 0),4);
+					Core.line(outImg, punto_D, punto_A, new Scalar(0, 255, 0),4);
+	
+						    	    
+					distancia_AB=distancia(punto_A,punto_B);
+					distancia_AC=distancia(punto_A,punto_C);
+					distancia_AD=distancia(punto_A,punto_D);
+			
+					angulo_A=angulo(punto_A, punto_D,punto_B);
+					angulo_B=angulo(punto_B, punto_A,punto_C);
+					angulo_C=angulo(punto_C, punto_B,punto_D);
+					angulo_D=angulo(punto_D, punto_C,punto_A);
+					
+					if((angulo_A < (3.1415 - 0.35)) && (angulo_A > 0.35) && 
+							(angulo_B < (3.1415 - 0.35)) && (angulo_B > 0.35) &&
+							(angulo_C < (3.1415 - 0.35)) && (angulo_C > 0.35) &&
+							(angulo_D < (3.1415 - 0.35)) && (angulo_D > 0.35) && 
+							distancia_AB > 100 && distancia_AC > 120 && distancia_AD > 50
+							)
+					{
+						//Encontre un billete
+						
+						res=res+j+" ";
+					}
 				}
+				SaveImage(outImg,fileName);
 			}
-			SaveImage(outImg,fileName);
 		}
 		return res;
 	}
@@ -181,96 +183,97 @@ public class SimpleBillSearch implements BillSearch {
 		double angulo_A,angulo_B,angulo_C,angulo_D;
 		
 		Log.d("Frente", "billetes:"+haystack.size());
-		for(int j=0; j<haystack.size();j++){
-			matches = new ArrayList<MatOfDMatch>();
-			matcher.knnMatch(haystack.get(j).getDFrente(), needle.getDFrente(), matches, 2);
-		   
-			good_matches=new ArrayList<DMatch>();
-			for(int i=0;i<matches.size();i++){
-						
-				if(matches.get(i).toList().get(0).distance < Pdistancia*matches.get(i).toList().get(1).distance)
-					good_matches.add(matches.get(i).toList().get(0));
-			}
-			Log.d("Frente", "goog_matches:"+good_matches.size());			
-			goodMatches = new MatOfDMatch();
-			goodMatches.fromList(good_matches);
-
-			Mat outImg=new Mat();
-			MatOfByte drawnMatches = new MatOfByte();
-			Features2d.drawMatches(haystack.get(j).getFrente(), haystack.get(j).getKFrente(), needle.getFrente(), needle.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-	        String currentDateandTime = sdf.format(new Date());
-	        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";			
-			
-			if(good_matches.size()>Ngoodmatches){
-				
-				
-				keypoints_objectList = new ArrayList<KeyPoint>();
-				keypoints_sceneList = new ArrayList<KeyPoint>();
-				keypoints_objectList = haystack.get(j).getKFrente().toList();
-				keypoints_sceneList = needle.getKFrente().toList();
-		
-				objList = new LinkedList<Point>();
-				sceneList = new LinkedList<Point>();
-				for(int i = 0; i<good_matches.size(); i++){
-				    objList.addLast(keypoints_objectList.get(good_matches.get(i).queryIdx).pt);
-				    sceneList.addLast(keypoints_sceneList.get(good_matches.get(i).trainIdx).pt);
+		if(needle.getKFrente().toList().size()>Nfeatures){
+			for(int j=0; j<haystack.size();j++){
+				matches = new ArrayList<MatOfDMatch>();
+				matcher.knnMatch(haystack.get(j).getDFrente(), needle.getDFrente(), matches, 2);
+			   
+				good_matches=new ArrayList<DMatch>();
+				for(int i=0;i<matches.size();i++){
+							
+					if(matches.get(i).toList().get(0).distance < Pdistancia*matches.get(i).toList().get(1).distance)
+						good_matches.add(matches.get(i).toList().get(0));
 				}
-				obj = new MatOfPoint2f();
-				sce = new MatOfPoint2f();
-				obj.fromList(objList);
-				sce.fromList(sceneList);
-				
-				Mat hg = Calib3d.findHomography(obj, sce,Metodo,CotaRansac);
-		
-				obj_corners = new Mat(4,1,CvType.CV_32FC2);
-				obj_corners.put(0, 0, new double[] {0,0});
-				obj_corners.put(1, 0, new double[] {haystack.get(j).getFrente().cols(),0});
-				obj_corners.put(2, 0, new double[] {haystack.get(j).getFrente().cols(),haystack.get(j).getFrente().rows()});
-				obj_corners.put(3, 0, new double[] {0,haystack.get(j).getFrente().rows()});
-				
-				scene_corners = new Mat(4,1,CvType.CV_32FC2);
-				Core.perspectiveTransform(obj_corners,scene_corners, hg);
+				Log.d("Frente", "goog_matches:"+good_matches.size());			
+				goodMatches = new MatOfDMatch();
+				goodMatches.fromList(good_matches);
 	
+				Mat outImg=new Mat();
+				MatOfByte drawnMatches = new MatOfByte();
+				Features2d.drawMatches(haystack.get(j).getFrente(), haystack.get(j).getKFrente(), needle.getFrente(), needle.getKFrente(), goodMatches, outImg,Scalar.all(-1),Scalar.all(-1),drawnMatches,Features2d.NOT_DRAW_SINGLE_POINTS); 
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		        String currentDateandTime = sdf.format(new Date());
+		        String fileName = good_matches.size()+"_"+currentDateandTime + ".png";			
 				
-				scene_corners.put(0,0,new double[] {scene_corners.get(0,0)[0]+haystack.get(j).getFrente().cols(),scene_corners.get(0,0)[1]});
-		    	scene_corners.put(1,0,new double[] {scene_corners.get(1,0)[0]+haystack.get(j).getFrente().cols(),scene_corners.get(1,0)[1]});
-		    	scene_corners.put(2,0,new double[] {scene_corners.get(2,0)[0]+haystack.get(j).getFrente().cols(),scene_corners.get(2,0)[1]});
-		    	scene_corners.put(3,0,new double[] {scene_corners.get(3,0)[0]+haystack.get(j).getFrente().cols(),scene_corners.get(3,0)[1]});
-		    					
-				
-				Point punto_A= new Point(scene_corners.get(0,0));
-				Point punto_B= new Point(scene_corners.get(1,0));
-				Point punto_C= new Point(scene_corners.get(2,0));
-				Point punto_D= new Point(scene_corners.get(3,0));
-				
-				Core.line(outImg, punto_A, punto_B, new Scalar(0, 255, 0),4);
-				Core.line(outImg, punto_B, punto_C, new Scalar(0, 255, 0),4);
-				Core.line(outImg, punto_C, punto_D, new Scalar(0, 255, 0),4);
-				Core.line(outImg, punto_D, punto_A, new Scalar(0, 255, 0),4);
-		    					
-				distancia_AB=distancia(punto_A,punto_B);
-				distancia_AC=distancia(punto_A,punto_C);
-				distancia_AD=distancia(punto_A,punto_D);
+				if(good_matches.size()>Ngoodmatches){
+					
+					
+					keypoints_objectList = new ArrayList<KeyPoint>();
+					keypoints_sceneList = new ArrayList<KeyPoint>();
+					keypoints_objectList = haystack.get(j).getKFrente().toList();
+					keypoints_sceneList = needle.getKFrente().toList();
+			
+					objList = new LinkedList<Point>();
+					sceneList = new LinkedList<Point>();
+					for(int i = 0; i<good_matches.size(); i++){
+					    objList.addLast(keypoints_objectList.get(good_matches.get(i).queryIdx).pt);
+					    sceneList.addLast(keypoints_sceneList.get(good_matches.get(i).trainIdx).pt);
+					}
+					obj = new MatOfPoint2f();
+					sce = new MatOfPoint2f();
+					obj.fromList(objList);
+					sce.fromList(sceneList);
+					
+					Mat hg = Calib3d.findHomography(obj, sce,Metodo,CotaRansac);
+			
+					obj_corners = new Mat(4,1,CvType.CV_32FC2);
+					obj_corners.put(0, 0, new double[] {0,0});
+					obj_corners.put(1, 0, new double[] {haystack.get(j).getFrente().cols(),0});
+					obj_corners.put(2, 0, new double[] {haystack.get(j).getFrente().cols(),haystack.get(j).getFrente().rows()});
+					obj_corners.put(3, 0, new double[] {0,haystack.get(j).getFrente().rows()});
+					
+					scene_corners = new Mat(4,1,CvType.CV_32FC2);
+					Core.perspectiveTransform(obj_corners,scene_corners, hg);
 		
-				angulo_A=angulo(punto_A, punto_D,punto_B);
-				angulo_B=angulo(punto_B, punto_A,punto_C);
-				angulo_C=angulo(punto_C, punto_B,punto_D);
-				angulo_D=angulo(punto_D, punto_C,punto_A);
-				
-				if((angulo_A < (3.1415 - 0.35)) && (angulo_A > 0.35) && 
-						(angulo_B < (3.1415 - 0.35)) && (angulo_B > 0.35) &&
-						(angulo_C < (3.1415 - 0.35)) && (angulo_C > 0.35) &&
-						(angulo_D < (3.1415 - 0.35)) && (angulo_D > 0.35) && 
-						distancia_AB > 100 && distancia_AC > 120 && distancia_AD > 50
-						)
-				{
-					//Encontre un billete
-					haystack.get(j).play();
-					res=res+j+" ";
+					
+					scene_corners.put(0,0,new double[] {scene_corners.get(0,0)[0]+haystack.get(j).getFrente().cols(),scene_corners.get(0,0)[1]});
+			    	scene_corners.put(1,0,new double[] {scene_corners.get(1,0)[0]+haystack.get(j).getFrente().cols(),scene_corners.get(1,0)[1]});
+			    	scene_corners.put(2,0,new double[] {scene_corners.get(2,0)[0]+haystack.get(j).getFrente().cols(),scene_corners.get(2,0)[1]});
+			    	scene_corners.put(3,0,new double[] {scene_corners.get(3,0)[0]+haystack.get(j).getFrente().cols(),scene_corners.get(3,0)[1]});
+			    					
+					
+					Point punto_A= new Point(scene_corners.get(0,0));
+					Point punto_B= new Point(scene_corners.get(1,0));
+					Point punto_C= new Point(scene_corners.get(2,0));
+					Point punto_D= new Point(scene_corners.get(3,0));
+					
+					Core.line(outImg, punto_A, punto_B, new Scalar(0, 255, 0),4);
+					Core.line(outImg, punto_B, punto_C, new Scalar(0, 255, 0),4);
+					Core.line(outImg, punto_C, punto_D, new Scalar(0, 255, 0),4);
+					Core.line(outImg, punto_D, punto_A, new Scalar(0, 255, 0),4);
+			    					
+					distancia_AB=distancia(punto_A,punto_B);
+					distancia_AC=distancia(punto_A,punto_C);
+					distancia_AD=distancia(punto_A,punto_D);
+			
+					angulo_A=angulo(punto_A, punto_D,punto_B);
+					angulo_B=angulo(punto_B, punto_A,punto_C);
+					angulo_C=angulo(punto_C, punto_B,punto_D);
+					angulo_D=angulo(punto_D, punto_C,punto_A);
+					
+					if((angulo_A < (3.1415 - 0.35)) && (angulo_A > 0.35) && 
+							(angulo_B < (3.1415 - 0.35)) && (angulo_B > 0.35) &&
+							(angulo_C < (3.1415 - 0.35)) && (angulo_C > 0.35) &&
+							(angulo_D < (3.1415 - 0.35)) && (angulo_D > 0.35) && 
+							distancia_AB > 50 && distancia_AC > 60 && distancia_AD > 20
+							)
+					{
+						//Encontre un billete
+						res=res+j+" ";
+					}
 				}
+				SaveImage(outImg,fileName);
 			}
-			SaveImage(outImg,fileName);
 		}
 		return res;
 	}

@@ -1,0 +1,7 @@
+1- INSTALL OPENCV LIB (apt-get install libopencv*)
+2- CD SRC 
+3- make DisplayVideoWebcam
+4- ./DisplayVideoWebcam
+
+libpthead as well as build-essential package have to be installed 
+

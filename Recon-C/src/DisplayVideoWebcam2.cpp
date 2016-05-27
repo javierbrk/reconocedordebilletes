@@ -75,20 +75,20 @@ int main(int argc, char* argv[])
 	std::vector<KeyPoint> vector_keypoints[14];
 
 	/*Cargo las distintas imagenes el el vector de imagenes*/
-	vector_imagenes[0]=imread( "images/templates/2p.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[1]=imread( "images/templates/2pd.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[2]=imread( "images/templates/5p.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[3]=imread( "images/templates/5pd.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[4]=imread( "images/templates/10p.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[5]=imread( "images/templates/10pd.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[6]=imread( "images/templates/20p.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[7]=imread( "images/templates/20pd.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[8]=imread( "images/templates/50p.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[9]=imread( "images/templates/50pd.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[10]=imread( "images/templates/100p.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[11]=imread( "images/templates/100pd.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[12]=imread( "images/templates/101p.jpg", IMREAD_GRAYSCALE );
-	vector_imagenes[13]=imread( "images/templates/101pd.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[0]=imread( "../images/templates/2p.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[1]=imread( "../images/templates/2pd.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[2]=imread( "../images/templates/5p.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[3]=imread( "../images/templates/5pd.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[4]=imread( "../images/templates/10p.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[5]=imread( "../images/templates/10pd.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[6]=imread( "../images/templates/20p.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[7]=imread( "../images/templates/20pd.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[8]=imread( "../images/templates/50p.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[9]=imread( "../images/templates/50pd.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[10]=imread( "../images/templates/100p.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[11]=imread( "../images/templates/100pd.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[12]=imread( "../images/templates/101p.jpg", IMREAD_GRAYSCALE );
+	vector_imagenes[13]=imread( "../images/templates/101pd.jpg", IMREAD_GRAYSCALE );
 
 	/*Paso 1: Detecto los keypoints usando SURF Detector de cada template*/
 	int minHessian = 400;
@@ -272,17 +272,17 @@ bool reconocerp(Mat img,Mat img_object,std::vector<KeyPoint> keypoints_object,Ma
 		  res=true;
 		  //imshow( "Good Matches & Object detection", img_matches );//mostramos la la imagen detectada y el template correspondiente
 		  if(idpesos<2){
-			  system ("play sound/2p.wav");
+			  system ("play ../sound/2p.wav");
 		  }else if(idpesos<4){
-			  system ("play sound/5p.wav");
+			  system ("play ../sound/5p.wav");
 		  }else if(idpesos<6){
-			  system ("play sound/10p.wav");
+			  system ("play ../sound/10p.wav");
 		  }else if(idpesos<8){
-			  system ("play sound/20p.wav");
+			  system ("play ../sound/20p.wav");
 		  }else if(idpesos<10){
-			  system ("play sound/50p.wav");
+			  system ("play ../sound/50p.wav");
 		  }else if(idpesos<14){
-			  system ("play sound/100p.wav");
+			  system ("play ../sound/100p.wav");
 		  }
 		  //Casos verdaderos
 

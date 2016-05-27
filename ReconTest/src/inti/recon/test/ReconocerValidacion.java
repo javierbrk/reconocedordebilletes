@@ -1,6 +1,5 @@
 package inti.recon.test;
 
-import inti.recon.Billete;
 import inti.recon.ReconActivity;
 
 import java.io.IOException;
@@ -8,29 +7,32 @@ import java.io.IOException;
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
-import inti.recon.test.R;
 
+import inti.recon.backend.BillSearch;
+import inti.recon.backend.Billete;
+import inti.recon.backend.SimpleBillSearch;
+import inti.recon.test.R;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class ReconocerValidacion extends ActivityInstrumentationTestCase2<ReconActivity> {
-
+	BillSearch bs;
 	
 	public ReconocerValidacion() {
 		super(ReconActivity.class);
 	}
 
 	protected void setUp() throws Exception {
+		bs = new SimpleBillSearch();
 		super.setUp();
 		
 		
 	}
 	
 	public void testCargaBilletes() {
-		
 	    // MyClass is tested
 		ReconActivity mainActivity = getActivity();
 		//Verifico si se cargaron los ocho tipos de billetes como templates
-	    assertEquals(8,mainActivity.getbilletes());
+	    assertEquals(8, mainActivity.getBilletes().size());
 	  }
 /*Test cases para dos pesos de frente*/
 	
@@ -49,10 +51,10 @@ public void testReconocerdosp_1() {
         Mat rgba=new Mat();
         org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
     	Imgproc.resize(srcRGBA,rgba,dzise);
-	    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+	    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
 	    
 	    // assert statements
-	    assertEquals("0 ",mainActivity.reconocerFrentes());
+	    assertEquals("0 ", bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
 	  }
 public void testReconocerdosp_10() {
 		
@@ -69,10 +71,10 @@ public void testReconocerdosp_10() {
         Mat rgba=new Mat();
         org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
     	Imgproc.resize(srcRGBA,rgba,dzise);
-	    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+	    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
 	    
 	    // assert statements
-	    assertEquals("0 ",mainActivity.reconocerFrentes());
+	    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
 	  }
 public void testReconocerdosp_20() {
 		
@@ -89,10 +91,10 @@ public void testReconocerdosp_20() {
         Mat rgba=new Mat();
         org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
     	Imgproc.resize(srcRGBA,rgba,dzise);
-	    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+	    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
 	    
 	    // assert statements
-	    assertEquals("0 ",mainActivity.reconocerFrentes());
+	    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
 	  }
 public void testReconocerdosp_30() {
 	
@@ -109,10 +111,10 @@ public void testReconocerdosp_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerFrentes());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdosp_40() {
 		
@@ -129,10 +131,10 @@ public void testReconocerdosp_40() {
         Mat rgba=new Mat();
         org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
     	Imgproc.resize(srcRGBA,rgba,dzise);
-	    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+	    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
 	    
 	    // assert statements
-	    assertEquals("0 ",mainActivity.reconocerFrentes());
+	    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
 	  }
 public void testReconocerdosp_50() {
 	
@@ -149,10 +151,10 @@ public void testReconocerdosp_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerFrentes());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdosp_60() {
 	
@@ -169,10 +171,10 @@ public void testReconocerdosp_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerFrentes());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdosp_70() {
 	
@@ -189,10 +191,10 @@ public void testReconocerdosp_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerFrentes());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdosp_80() {
 	
@@ -209,10 +211,10 @@ public void testReconocerdosp_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerFrentes());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdosp_90() {
 	
@@ -229,10 +231,10 @@ public void testReconocerdosp_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerFrentes());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdosp_100() {
 	
@@ -249,10 +251,10 @@ public void testReconocerdosp_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerFrentes());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 /*Test cases para dos pesos de dorso*/
 
@@ -271,10 +273,10 @@ public void testReconocerdospd_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_10() {
 	
@@ -291,10 +293,10 @@ public void testReconocerdospd_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_20() {
 	
@@ -311,10 +313,10 @@ public void testReconocerdospd_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_30() {
 	
@@ -331,10 +333,10 @@ public void testReconocerdospd_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_40() {
 	
@@ -351,10 +353,10 @@ public void testReconocerdospd_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_50() {
 	
@@ -371,10 +373,10 @@ public void testReconocerdospd_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_60() {
 	
@@ -391,10 +393,10 @@ public void testReconocerdospd_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_70() {
 	
@@ -411,10 +413,10 @@ public void testReconocerdospd_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_80() {
 	
@@ -431,10 +433,10 @@ public void testReconocerdospd_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_90() {
 	
@@ -451,10 +453,10 @@ public void testReconocerdospd_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdospd_100() {
 	
@@ -471,10 +473,10 @@ public void testReconocerdospd_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("0 ",mainActivity.reconocerDorsos());
+    assertEquals("0 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 
@@ -496,10 +498,10 @@ public void testReconocercincop_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_10() {
 	
@@ -516,10 +518,10 @@ public void testReconocercincop_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_20() {
 	
@@ -536,10 +538,10 @@ public void testReconocercincop_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_30() {
 	
@@ -556,10 +558,10 @@ public void testReconocercincop_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_40() {
 	
@@ -576,10 +578,10 @@ public void testReconocercincop_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_50() {
 	
@@ -596,10 +598,10 @@ public void testReconocercincop_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_60() {
 	
@@ -616,10 +618,10 @@ public void testReconocercincop_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_70() {
 	
@@ -636,10 +638,10 @@ public void testReconocercincop_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_80() {
 	
@@ -655,10 +657,10 @@ public void testReconocercincop_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_90() {
 	
@@ -675,10 +677,10 @@ public void testReconocercincop_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincop_100() {
 	
@@ -695,10 +697,10 @@ public void testReconocercincop_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerFrentes());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 
@@ -720,10 +722,10 @@ public void testReconocercincopd_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_10() {
 	
@@ -740,10 +742,10 @@ public void testReconocercincopd_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_20() {
 	
@@ -760,10 +762,10 @@ public void testReconocercincopd_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_30() {
 	
@@ -780,10 +782,10 @@ public void testReconocercincopd_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_40() {
 	
@@ -800,10 +802,10 @@ public void testReconocercincopd_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_50() {
 	
@@ -820,10 +822,10 @@ public void testReconocercincopd_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_60() {
 	
@@ -840,10 +842,10 @@ public void testReconocercincopd_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_70() {
 	
@@ -860,10 +862,10 @@ public void testReconocercincopd_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_80() {
 	
@@ -880,10 +882,10 @@ public void testReconocercincopd_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_90() {
 	
@@ -900,10 +902,10 @@ public void testReconocercincopd_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocercincopd_100() {
 	
@@ -920,10 +922,10 @@ public void testReconocercincopd_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("1 ",mainActivity.reconocerDorsos());
+    assertEquals("1 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 
@@ -944,10 +946,10 @@ public void testReconocerdiezp_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_10() {
@@ -965,10 +967,10 @@ public void testReconocerdiezp_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 public void testReconocerdiezp_20() {
 	
@@ -985,10 +987,10 @@ public void testReconocerdiezp_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_30() {
@@ -1006,10 +1008,10 @@ public void testReconocerdiezp_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_40() {
@@ -1027,10 +1029,10 @@ public void testReconocerdiezp_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_50() {
@@ -1048,10 +1050,10 @@ public void testReconocerdiezp_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_60() {
@@ -1069,10 +1071,10 @@ public void testReconocerdiezp_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_70() {
@@ -1090,10 +1092,10 @@ public void testReconocerdiezp_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_80() {
@@ -1111,10 +1113,10 @@ public void testReconocerdiezp_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_90() {
@@ -1132,10 +1134,10 @@ public void testReconocerdiezp_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezp_100() {
@@ -1153,10 +1155,10 @@ public void testReconocerdiezp_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerFrentes());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 /*Test cases para diez pesos de dorso*/
@@ -1176,10 +1178,10 @@ public void testReconocerdiezpd_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_10() {
@@ -1197,10 +1199,10 @@ public void testReconocerdiezpd_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_20() {
@@ -1218,10 +1220,10 @@ public void testReconocerdiezpd_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_30() {
@@ -1239,10 +1241,10 @@ public void testReconocerdiezpd_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_40() {
@@ -1260,10 +1262,10 @@ public void testReconocerdiezpd_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_50() {
@@ -1281,10 +1283,10 @@ public void testReconocerdiezpd_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_60() {
@@ -1302,10 +1304,10 @@ public void testReconocerdiezpd_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_70() {
@@ -1323,10 +1325,10 @@ public void testReconocerdiezpd_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_80() {
@@ -1344,10 +1346,10 @@ public void testReconocerdiezpd_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_90() {
@@ -1365,10 +1367,10 @@ public void testReconocerdiezpd_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerdiezpd_100() {
@@ -1386,10 +1388,10 @@ public void testReconocerdiezpd_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("2 ",mainActivity.reconocerDorsos());
+    assertEquals("2 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 
@@ -1411,10 +1413,10 @@ public void testReconocerveintep_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_10() {
@@ -1432,10 +1434,10 @@ public void testReconocerveintep_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_20() {
@@ -1453,10 +1455,10 @@ public void testReconocerveintep_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_30() {
@@ -1474,10 +1476,10 @@ public void testReconocerveintep_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_40() {
@@ -1495,10 +1497,10 @@ public void testReconocerveintep_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_50() {
@@ -1516,10 +1518,10 @@ public void testReconocerveintep_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_60() {
@@ -1537,10 +1539,10 @@ public void testReconocerveintep_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_70() {
@@ -1558,10 +1560,10 @@ public void testReconocerveintep_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_80() {
@@ -1579,10 +1581,10 @@ public void testReconocerveintep_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_90() {
@@ -1600,10 +1602,10 @@ public void testReconocerveintep_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintep_100() {
@@ -1621,10 +1623,10 @@ public void testReconocerveintep_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerFrentes());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 /*Test case para veinte pesos de dorso*/
@@ -1644,10 +1646,10 @@ public void testReconocerveintepd_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_10() {
@@ -1665,10 +1667,10 @@ public void testReconocerveintepd_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_20() {
@@ -1688,10 +1690,10 @@ public void testReconocerveintepd_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_30() {
@@ -1711,10 +1713,10 @@ public void testReconocerveintepd_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_40() {
@@ -1734,10 +1736,10 @@ public void testReconocerveintepd_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_50() {
@@ -1757,10 +1759,10 @@ public void testReconocerveintepd_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_60() {
@@ -1780,10 +1782,10 @@ public void testReconocerveintepd_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_70() {
@@ -1803,10 +1805,10 @@ public void testReconocerveintepd_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_80() {
@@ -1826,10 +1828,10 @@ public void testReconocerveintepd_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_90() {
@@ -1849,10 +1851,10 @@ public void testReconocerveintepd_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocerveintepd_100() {
@@ -1872,10 +1874,10 @@ public void testReconocerveintepd_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("3 ",mainActivity.reconocerDorsos());
+    assertEquals("3 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 /*Test case para cincuenta pesos de frente*/
@@ -1897,10 +1899,10 @@ public void testReconocercincuentap_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_10() {
@@ -1920,10 +1922,10 @@ public void testReconocercincuentap_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_20() {
@@ -1943,10 +1945,10 @@ public void testReconocercincuentap_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_30() {
@@ -1966,10 +1968,10 @@ public void testReconocercincuentap_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_40() {
@@ -1989,10 +1991,10 @@ public void testReconocercincuentap_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_50() {
@@ -2012,10 +2014,10 @@ public void testReconocercincuentap_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_60() {
@@ -2035,10 +2037,10 @@ public void testReconocercincuentap_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_70() {
@@ -2058,10 +2060,10 @@ public void testReconocercincuentap_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_80() {
@@ -2081,10 +2083,10 @@ public void testReconocercincuentap_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_90() {
@@ -2104,10 +2106,10 @@ public void testReconocercincuentap_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentap_100() {
@@ -2127,10 +2129,10 @@ public void testReconocercincuentap_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerFrentes());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 /*Test case para cincuenta pesos de dorso*/
 
@@ -2151,10 +2153,10 @@ public void testReconocercincuentapd_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_10() {
@@ -2174,10 +2176,10 @@ public void testReconocercincuentapd_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_20() {
@@ -2197,10 +2199,10 @@ public void testReconocercincuentapd_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_30() {
@@ -2220,10 +2222,10 @@ public void testReconocercincuentapd_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_40() {
@@ -2243,10 +2245,10 @@ public void testReconocercincuentapd_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_50() {
@@ -2266,10 +2268,10 @@ public void testReconocercincuentapd_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_60() {
@@ -2289,10 +2291,10 @@ public void testReconocercincuentapd_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_70() {
@@ -2312,10 +2314,10 @@ public void testReconocercincuentapd_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_80() {
@@ -2335,10 +2337,10 @@ public void testReconocercincuentapd_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_90() {
@@ -2358,10 +2360,10 @@ public void testReconocercincuentapd_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercincuentapd_100() {
@@ -2381,10 +2383,10 @@ public void testReconocercincuentapd_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("4 ",mainActivity.reconocerDorsos());
+    assertEquals("4 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 /*Test case para cien pesos de frente*/
@@ -2404,10 +2406,10 @@ public void testReconocercienp_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_10() {
@@ -2425,10 +2427,10 @@ public void testReconocercienp_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_20() {
@@ -2448,10 +2450,10 @@ public void testReconocercienp_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_30() {
@@ -2471,10 +2473,10 @@ public void testReconocercienp_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_40() {
@@ -2494,10 +2496,10 @@ public void testReconocercienp_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_50() {
@@ -2517,10 +2519,10 @@ public void testReconocercienp_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_60() {
@@ -2540,10 +2542,10 @@ public void testReconocercienp_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_70() {
@@ -2563,10 +2565,10 @@ public void testReconocercienp_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_80() {
@@ -2586,10 +2588,10 @@ public void testReconocercienp_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_90() {
@@ -2609,10 +2611,10 @@ public void testReconocercienp_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienp_100() {
@@ -2632,10 +2634,10 @@ public void testReconocercienp_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerFrentes());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 /*Test case para cien pesos de dorso*/
@@ -2655,10 +2657,10 @@ public void testReconocercienpd_1() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_10() {
@@ -2676,10 +2678,10 @@ public void testReconocercienpd_10() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_20() {
@@ -2699,10 +2701,10 @@ public void testReconocercienpd_20() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_30() {
@@ -2722,10 +2724,10 @@ public void testReconocercienpd_30() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_40() {
@@ -2745,10 +2747,10 @@ public void testReconocercienpd_40() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_50() {
@@ -2768,10 +2770,10 @@ public void testReconocercienpd_50() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_60() {
@@ -2791,10 +2793,10 @@ public void testReconocercienpd_60() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_70() {
@@ -2814,10 +2816,10 @@ public void testReconocercienpd_70() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_80() {
@@ -2837,10 +2839,10 @@ public void testReconocercienpd_80() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_90() {
@@ -2860,10 +2862,10 @@ public void testReconocercienpd_90() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 public void testReconocercienpd_100() {
@@ -2883,10 +2885,10 @@ public void testReconocercienpd_100() {
     Mat rgba=new Mat();
     org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
 	Imgproc.resize(srcRGBA,rgba,dzise);
-    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba, R.raw.cienpesos);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
     
     // assert statements
-    assertEquals("6 ",mainActivity.reconocerDorsos());
+    assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
 
 }

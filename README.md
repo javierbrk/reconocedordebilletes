@@ -1,13 +1,16 @@
 # reconocedordebilletes
 Reconocedor de denominación de billetes para personas en situacion de discapaciad visual.
 
+
+
 Creemos importante que este proyecto sea un proyecto de código abierto y disponible para todos, es por ello que nos interesa de sobremanera que se puedan sumar todos los que quieran participar.
  
-Actualmente contamos con un prototipo funcionando en una tablet y en un teléfono de gama media con android 4.2.
+Actualmente contamos con un prototipo funcionando en PC (Ubuntu) y en dispositivos moviles (android 4.0.3)
+http://44jaiio.sadio.org.ar/sites/default/files/sts252-263.pdf
 
 De acuerdo a las pruebas realizadas con billetes para ciertos billetes funciona muy bien pero para otros no tanto ($2 reverso).
 
-De acuerdo a las ultimas pruebas hemos notado que es necesario que cada dispositivo realice una calibración previa.
+De acuerdo a las ultimas pruebas hemos notado que es necesario que cada dispositivo realice una calibración previa. El principal factor que afecta a la deteccion es la resolucion de la camara, por ahora es importante configurar la camara a una resolucion de 800*600.
 
 Dado que el prototipo funciona podemos afirmar que la metodología utilizada es correcta. Pero dada la complejidad de la misma será necesario realizar ajustes finos que involucran pruebas exhaustivas y documentadas de laboratorio.
 
@@ -21,37 +24,18 @@ Los pasos a seguir son:
      Pruebas con sujetos en condiciones reales.
 
 
-Publicaciones
-Se realizarán publicaciones de tipo técnicas con el fin de recibir realimentación y sugerencias sobre la metodología utilizada.
-De acuerdo a lo hablado y expresado en múltiples oportunidades no se realizaran publicaciones de tipo difusión/divulgación hasta no contar con pruebas reales de personas con problemas de visión.
+##Publicaciones
+Se realizarán publicaciones de tipo técnicas con el fin de recibir realimentación y sugerencias sobre la metodología utilizada
+https://www.inti.gob.ar/tecnointi/pdf/TecnoINTI2015.pdf pg 396#
 
-Referencias
-[1]Agrawal, M. & Konolige, K. & Blas, M. (2008). “Censure:CEnter
-surround extremas for realtime feacture detection and matching ,”
-Computer Vision ECCV 2008.
-[2]Alahik, A. & Ortiz, R. & Vandergheynst, P. (2012). “Freak: Fast
-retina keypoint,” Computer Vision ECCV 2012.
-[3]Bay, H. & Tuytelaars, T. & Van Gool, L. (2006). “Surf:Speeded up
-robustfeactures,” Computer Vision-ECCV 2006.
-[4]Calonder, M. & Lepetit, V. & Strecha, C. & Fua, P. (2010).
-“Brief:Binary robust independent elementary feactures,” Computer
-Vision ECCV 2010.
-[5]Heckbert, P. (1994). Graphics Gems: IV. Morgan Kaufmann, p.
-575.
-[6]Leutenegger, S. (2011). “BRISK:Binary robust invariant sacalable
-keypoints” Computer Vision ECCV 2011.
-[7]Lowe, D. (2004). “Distintive image feactures from scaleinvariant
-keypoints,” International journalof computer vision.
-[8]Matas, J. & Chum, O. & Urban, M. & Pajdla, T. (2004). “Robust
-wide-baseline stereo from maximally satble extermal regions,”
-Image and vision computing.
-[9] Muja, M. & Lowe, D. (2009). “Fast Approximate Nearest
-Neighbors with Automatic Algorithm Configuration.,” VISAPP(1).
-[10]Rosten, E. &Drummond, T. (2006). “Machine learning for high-
-speed corner detection,” Computer Vision ECCV 2006.
-[11]Rublee, E. & Rabaud, V. (2011). “ORB:an efficient alternative to
-SIFT or SURF” Computer Vision ECCV 2011.
-[12]Shi, J. & Tomassi, C.(1994). “Good feacture to track,” Poceeding
-CVPR'94., 1994 IEEE.
-[13]Carlos Miguel Correia da Costa, (2014) "Multiview banknote recognition with component and shape analysis"
-[14]Ilya Toytman Jonathan Thambidurai, "Banknote recognition on Android platform"
+De acuerdo a lo discutido y expresado en múltiples oportunidades no se realizaran publicaciones de tipo difusión/divulgación hasta no contar con pruebas reales de personas con problemas de visión.
+
+##Referencias
+
+Procesamiento de imagenes en general http://szeliski.org/Book/drafts/SzeliskiBook_20100903_draft.pdf
+
+Carlos Miguel Correia da Costa, (2014) "Multiview banknote recognition with component and shape analysis" http://www.kjer.in/archives/vol2/issue1/61.%20Currency%20Recognition%20in%20Mobile%20Application%20for%20Visually%20Challenged.pdf
+
+Ilya Toytman Jonathan Thambidurai, "Banknote recognition on Android platform" https://stacks.stanford.edu/file/druid:my512gb2187/Toytman_Thambidurai_Coin_counting_with_Android.pdf
+
+Euro money bill recognition vgg.fiit.stuba.sk/wordpress/2013-07/euro-money-bill-recognition/

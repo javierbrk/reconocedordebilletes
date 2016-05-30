@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ReconTest" project="ReconTest" tests="133" started="133" failures="55" errors="0" ignored="0">
+  <testsuite name="samsung-sm_g355m-42035a5af2c44200" time="1417.291">
+    <testsuite name="inti.recon.test.ReconocerValidacion" time="1417.291">
+      <testcase name="testCargaBilletes " classname="inti.recon.test.ReconocerValidacion" time="7.378">
+        <failure>junit.framework.AssertionFailedError: expected:&lt;8&gt; but was:&lt;9&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testCargaBilletes(ReconocerValidacion.java:35)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercienp_1 " classname="inti.recon.test.ReconocerValidacion" time="8.906"/>
+      <testcase name="testReconocercienp_10 " classname="inti.recon.test.ReconocerValidacion" time="8.882"/>
+      <testcase name="testReconocercienp_100 " classname="inti.recon.test.ReconocerValidacion" time="8.958"/>
+      <testcase name="testReconocercienp_20 " classname="inti.recon.test.ReconocerValidacion" time="10.759"/>
+      <testcase name="testReconocercienp_30 " classname="inti.recon.test.ReconocerValidacion" time="7.676"/>
+      <testcase name="testReconocercienp_40 " classname="inti.recon.test.ReconocerValidacion" time="11.037"/>
+      <testcase name="testReconocercienp_50 " classname="inti.recon.test.ReconocerValidacion" time="10.085"/>
+      <testcase name="testReconocercienp_60 " classname="inti.recon.test.ReconocerValidacion" time="9.683"/>
+      <testcase name="testReconocercienp_70 " classname="inti.recon.test.ReconocerValidacion" time="11.49"/>
+      <testcase name="testReconocercienp_80 " classname="inti.recon.test.ReconocerValidacion" time="9.709"/>
+      <testcase name="testReconocercienp_90 " classname="inti.recon.test.ReconocerValidacion" time="9.984"/>
+      <testcase name="testReconocercienpd_1 " classname="inti.recon.test.ReconocerValidacion" time="8.881">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[6 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercienpd_1(ReconocerValidacion.java:2663)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercienpd_10 " classname="inti.recon.test.ReconocerValidacion" time="10.108"/>
+      <testcase name="testReconocercienpd_100 " classname="inti.recon.test.ReconocerValidacion" time="10.485">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[6 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercienpd_100(ReconocerValidacion.java:2891)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercienpd_20 " classname="inti.recon.test.ReconocerValidacion" time="10.56"/>
+      <testcase name="testReconocercienpd_30 " classname="inti.recon.test.ReconocerValidacion" time="10.877"/>
+      <testcase name="testReconocercienpd_40 " classname="inti.recon.test.ReconocerValidacion" time="9.359"/>
+      <testcase name="testReconocercienpd_50 " classname="inti.recon.test.ReconocerValidacion" time="9.334">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[6 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercienpd_50(ReconocerValidacion.java:2776)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercienpd_60 " classname="inti.recon.test.ReconocerValidacion" time="10.841"/>
+      <testcase name="testReconocercienpd_70 " classname="inti.recon.test.ReconocerValidacion" time="10.992">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[6 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercienpd_70(ReconocerValidacion.java:2822)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercienpd_80 " classname="inti.recon.test.ReconocerValidacion" time="9.735"/>
+      <testcase name="testReconocercienpd_90 " classname="inti.recon.test.ReconocerValidacion" time="11.026"/>
+      <testcase name="testReconocercincop_1 " classname="inti.recon.test.ReconocerValidacion" time="10.213">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincop_1(ReconocerValidacion.java:504)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincop_10 " classname="inti.recon.test.ReconocerValidacion" time="10.358"/>
+      <testcase name="testReconocercincop_100 " classname="inti.recon.test.ReconocerValidacion" time="9.179"/>
+      <testcase name="testReconocercincop_20 " classname="inti.recon.test.ReconocerValidacion" time="10.818"/>
+      <testcase name="testReconocercincop_30 " classname="inti.recon.test.ReconocerValidacion" time="11.922"/>
+      <testcase name="testReconocercincop_40 " classname="inti.recon.test.ReconocerValidacion" time="11.797">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[]1 &gt; but was:&lt;[0 ]1 &gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincop_40(ReconocerValidacion.java:584)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincop_50 " classname="inti.recon.test.ReconocerValidacion" time="11.519"/>
+      <testcase name="testReconocercincop_60 " classname="inti.recon.test.ReconocerValidacion" time="11.521"/>
+      <testcase name="testReconocercincop_70 " classname="inti.recon.test.ReconocerValidacion" time="11.744"/>
+      <testcase name="testReconocercincop_80 " classname="inti.recon.test.ReconocerValidacion" time="11.344"/>
+      <testcase name="testReconocercincop_90 " classname="inti.recon.test.ReconocerValidacion" time="11.619">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;1 []&gt; but was:&lt;1 [4 ]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincop_90(ReconocerValidacion.java:683)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_1 " classname="inti.recon.test.ReconocerValidacion" time="9.034">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_1(ReconocerValidacion.java:728)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_10 " classname="inti.recon.test.ReconocerValidacion" time="11.62">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_10(ReconocerValidacion.java:748)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_100 " classname="inti.recon.test.ReconocerValidacion" time="9.885">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_100(ReconocerValidacion.java:928)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_20 " classname="inti.recon.test.ReconocerValidacion" time="12.266">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_20(ReconocerValidacion.java:768)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_30 " classname="inti.recon.test.ReconocerValidacion" time="10.767"/>
+      <testcase name="testReconocercincopd_40 " classname="inti.recon.test.ReconocerValidacion" time="11.899">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1] &gt; but was:&lt;[8] &gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_40(ReconocerValidacion.java:808)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_50 " classname="inti.recon.test.ReconocerValidacion" time="10.086">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_50(ReconocerValidacion.java:828)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_60 " classname="inti.recon.test.ReconocerValidacion" time="10.968"/>
+      <testcase name="testReconocercincopd_70 " classname="inti.recon.test.ReconocerValidacion" time="11.571">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_70(ReconocerValidacion.java:868)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_80 " classname="inti.recon.test.ReconocerValidacion" time="11.869">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_80(ReconocerValidacion.java:888)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincopd_90 " classname="inti.recon.test.ReconocerValidacion" time="12.019">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[1 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincopd_90(ReconocerValidacion.java:908)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincuentap_1 " classname="inti.recon.test.ReconocerValidacion" time="11.493"/>
+      <testcase name="testReconocercincuentap_10 " classname="inti.recon.test.ReconocerValidacion" time="10.262"/>
+      <testcase name="testReconocercincuentap_100 " classname="inti.recon.test.ReconocerValidacion" time="10.234"/>
+      <testcase name="testReconocercincuentap_20 " classname="inti.recon.test.ReconocerValidacion" time="12.596"/>
+      <testcase name="testReconocercincuentap_30 " classname="inti.recon.test.ReconocerValidacion" time="10.913"/>
+      <testcase name="testReconocercincuentap_40 " classname="inti.recon.test.ReconocerValidacion" time="11.269"/>
+      <testcase name="testReconocercincuentap_50 " classname="inti.recon.test.ReconocerValidacion" time="11.266"/>
+      <testcase name="testReconocercincuentap_60 " classname="inti.recon.test.ReconocerValidacion" time="10.814"/>
+      <testcase name="testReconocercincuentap_70 " classname="inti.recon.test.ReconocerValidacion" time="11.252"/>
+      <testcase name="testReconocercincuentap_80 " classname="inti.recon.test.ReconocerValidacion" time="11.012">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;4 []&gt; but was:&lt;4 [8 ]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincuentap_80(ReconocerValidacion.java:2089)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincuentap_90 " classname="inti.recon.test.ReconocerValidacion" time="10.284"/>
+      <testcase name="testReconocercincuentapd_1 " classname="inti.recon.test.ReconocerValidacion" time="12.794">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[]4 &gt; but was:&lt;[2 ]4 &gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincuentapd_1(ReconocerValidacion.java:2159)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincuentapd_10 " classname="inti.recon.test.ReconocerValidacion" time="11.972"/>
+      <testcase name="testReconocercincuentapd_100 " classname="inti.recon.test.ReconocerValidacion" time="12.695">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[4 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincuentapd_100(ReconocerValidacion.java:2389)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincuentapd_20 " classname="inti.recon.test.ReconocerValidacion" time="10.735"/>
+      <testcase name="testReconocercincuentapd_30 " classname="inti.recon.test.ReconocerValidacion" time="11.289"/>
+      <testcase name="testReconocercincuentapd_40 " classname="inti.recon.test.ReconocerValidacion" time="10.263">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[4 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincuentapd_40(ReconocerValidacion.java:2251)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincuentapd_50 " classname="inti.recon.test.ReconocerValidacion" time="10.709"/>
+      <testcase name="testReconocercincuentapd_60 " classname="inti.recon.test.ReconocerValidacion" time="11.641">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[4 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincuentapd_60(ReconocerValidacion.java:2297)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincuentapd_70 " classname="inti.recon.test.ReconocerValidacion" time="10.338">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[4 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocercincuentapd_70(ReconocerValidacion.java:2320)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocercincuentapd_80 " classname="inti.recon.test.ReconocerValidacion" time="11.715"/>
+      <testcase name="testReconocercincuentapd_90 " classname="inti.recon.test.ReconocerValidacion" time="11.666"/>
+      <testcase name="testReconocerdiezp_1 " classname="inti.recon.test.ReconocerValidacion" time="9.933">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezp_1(ReconocerValidacion.java:952)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezp_10 " classname="inti.recon.test.ReconocerValidacion" time="9.808">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezp_10(ReconocerValidacion.java:973)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezp_100 " classname="inti.recon.test.ReconocerValidacion" time="11.315"/>
+      <testcase name="testReconocerdiezp_20 " classname="inti.recon.test.ReconocerValidacion" time="9.759"/>
+      <testcase name="testReconocerdiezp_30 " classname="inti.recon.test.ReconocerValidacion" time="10.987"/>
+      <testcase name="testReconocerdiezp_40 " classname="inti.recon.test.ReconocerValidacion" time="11.488"/>
+      <testcase name="testReconocerdiezp_50 " classname="inti.recon.test.ReconocerValidacion" time="10.636"/>
+      <testcase name="testReconocerdiezp_60 " classname="inti.recon.test.ReconocerValidacion" time="9.883">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezp_60(ReconocerValidacion.java:1077)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezp_70 " classname="inti.recon.test.ReconocerValidacion" time="9.482"/>
+      <testcase name="testReconocerdiezp_80 " classname="inti.recon.test.ReconocerValidacion" time="10.209"/>
+      <testcase name="testReconocerdiezp_90 " classname="inti.recon.test.ReconocerValidacion" time="10.486"/>
+      <testcase name="testReconocerdiezpd_1 " classname="inti.recon.test.ReconocerValidacion" time="9.256">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezpd_1(ReconocerValidacion.java:1184)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezpd_10 " classname="inti.recon.test.ReconocerValidacion" time="11.163">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezpd_10(ReconocerValidacion.java:1205)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezpd_100 " classname="inti.recon.test.ReconocerValidacion" time="9.583">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezpd_100(ReconocerValidacion.java:1394)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezpd_20 " classname="inti.recon.test.ReconocerValidacion" time="9.307"/>
+      <testcase name="testReconocerdiezpd_30 " classname="inti.recon.test.ReconocerValidacion" time="9.607"/>
+      <testcase name="testReconocerdiezpd_40 " classname="inti.recon.test.ReconocerValidacion" time="10.26">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezpd_40(ReconocerValidacion.java:1268)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezpd_50 " classname="inti.recon.test.ReconocerValidacion" time="10.034"/>
+      <testcase name="testReconocerdiezpd_60 " classname="inti.recon.test.ReconocerValidacion" time="9.858">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezpd_60(ReconocerValidacion.java:1310)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezpd_70 " classname="inti.recon.test.ReconocerValidacion" time="10.66">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezpd_70(ReconocerValidacion.java:1331)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezpd_80 " classname="inti.recon.test.ReconocerValidacion" time="10.962">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezpd_80(ReconocerValidacion.java:1352)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdiezpd_90 " classname="inti.recon.test.ReconocerValidacion" time="11.363">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[2 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdiezpd_90(ReconocerValidacion.java:1373)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdosp_1 " classname="inti.recon.test.ReconocerValidacion" time="11.714">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdosp_1(ReconocerValidacion.java:57)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdosp_10 " classname="inti.recon.test.ReconocerValidacion" time="11.087"/>
+      <testcase name="testReconocerdosp_100 " classname="inti.recon.test.ReconocerValidacion" time="10.184">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;0 []&gt; but was:&lt;0 [2 ]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdosp_100(ReconocerValidacion.java:257)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdosp_20 " classname="inti.recon.test.ReconocerValidacion" time="10.16"/>
+      <testcase name="testReconocerdosp_30 " classname="inti.recon.test.ReconocerValidacion" time="9.783"/>
+      <testcase name="testReconocerdosp_40 " classname="inti.recon.test.ReconocerValidacion" time="9.934"/>
+      <testcase name="testReconocerdosp_50 " classname="inti.recon.test.ReconocerValidacion" time="9.959"/>
+      <testcase name="testReconocerdosp_60 " classname="inti.recon.test.ReconocerValidacion" time="9.835">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdosp_60(ReconocerValidacion.java:177)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdosp_70 " classname="inti.recon.test.ReconocerValidacion" time="11.062"/>
+      <testcase name="testReconocerdosp_80 " classname="inti.recon.test.ReconocerValidacion" time="10.236">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdosp_80(ReconocerValidacion.java:217)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdosp_90 " classname="inti.recon.test.ReconocerValidacion" time="10.661"/>
+      <testcase name="testReconocerdospd_1 " classname="inti.recon.test.ReconocerValidacion" time="9.305">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_1(ReconocerValidacion.java:279)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_10 " classname="inti.recon.test.ReconocerValidacion" time="10.737">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_10(ReconocerValidacion.java:299)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_100 " classname="inti.recon.test.ReconocerValidacion" time="10.94">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_100(ReconocerValidacion.java:479)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_20 " classname="inti.recon.test.ReconocerValidacion" time="11.39">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_20(ReconocerValidacion.java:319)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_30 " classname="inti.recon.test.ReconocerValidacion" time="10.762">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_30(ReconocerValidacion.java:339)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_40 " classname="inti.recon.test.ReconocerValidacion" time="11.89">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_40(ReconocerValidacion.java:359)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_50 " classname="inti.recon.test.ReconocerValidacion" time="9.408">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_50(ReconocerValidacion.java:379)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_60 " classname="inti.recon.test.ReconocerValidacion" time="11.113">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_60(ReconocerValidacion.java:399)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_70 " classname="inti.recon.test.ReconocerValidacion" time="11.614">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_70(ReconocerValidacion.java:419)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_80 " classname="inti.recon.test.ReconocerValidacion" time="10.261">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_80(ReconocerValidacion.java:439)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerdospd_90 " classname="inti.recon.test.ReconocerValidacion" time="9.884">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[0 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerdospd_90(ReconocerValidacion.java:459)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerveintep_1 " classname="inti.recon.test.ReconocerValidacion" time="11.791">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[3 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerveintep_1(ReconocerValidacion.java:1419)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerveintep_10 " classname="inti.recon.test.ReconocerValidacion" time="10.743">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[]3 &gt; but was:&lt;[0 ]3 &gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerveintep_10(ReconocerValidacion.java:1440)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerveintep_100 " classname="inti.recon.test.ReconocerValidacion" time="11.69"/>
+      <testcase name="testReconocerveintep_20 " classname="inti.recon.test.ReconocerValidacion" time="11.84"/>
+      <testcase name="testReconocerveintep_30 " classname="inti.recon.test.ReconocerValidacion" time="11.414"/>
+      <testcase name="testReconocerveintep_40 " classname="inti.recon.test.ReconocerValidacion" time="11.865"/>
+      <testcase name="testReconocerveintep_50 " classname="inti.recon.test.ReconocerValidacion" time="9.832"/>
+      <testcase name="testReconocerveintep_60 " classname="inti.recon.test.ReconocerValidacion" time="10.561"/>
+      <testcase name="testReconocerveintep_70 " classname="inti.recon.test.ReconocerValidacion" time="10.912"/>
+      <testcase name="testReconocerveintep_80 " classname="inti.recon.test.ReconocerValidacion" time="10.184"/>
+      <testcase name="testReconocerveintep_90 " classname="inti.recon.test.ReconocerValidacion" time="12.345"/>
+      <testcase name="testReconocerveintepd_1 " classname="inti.recon.test.ReconocerValidacion" time="11.439">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[3 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerveintepd_1(ReconocerValidacion.java:1652)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerveintepd_10 " classname="inti.recon.test.ReconocerValidacion" time="10.811">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[3 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerveintepd_10(ReconocerValidacion.java:1673)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerveintepd_100 " classname="inti.recon.test.ReconocerValidacion" time="10.485"/>
+      <testcase name="testReconocerveintepd_20 " classname="inti.recon.test.ReconocerValidacion" time="10.586"/>
+      <testcase name="testReconocerveintepd_30 " classname="inti.recon.test.ReconocerValidacion" time="10.661"/>
+      <testcase name="testReconocerveintepd_40 " classname="inti.recon.test.ReconocerValidacion" time="10.285">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[3 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerveintepd_40(ReconocerValidacion.java:1742)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerveintepd_50 " classname="inti.recon.test.ReconocerValidacion" time="11.035"/>
+      <testcase name="testReconocerveintepd_60 " classname="inti.recon.test.ReconocerValidacion" time="11.615"/>
+      <testcase name="testReconocerveintepd_70 " classname="inti.recon.test.ReconocerValidacion" time="9.909"/>
+      <testcase name="testReconocerveintepd_80 " classname="inti.recon.test.ReconocerValidacion" time="10.21">
+        <failure>junit.framework.ComparisonFailure: expected:&lt;[3 ]&gt; but was:&lt;[]&gt;&#13;
+at inti.recon.test.ReconocerValidacion.testReconocerveintepd_80(ReconocerValidacion.java:1834)&#13;
+at java.lang.reflect.Method.invokeNative(Native Method)&#13;
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)&#13;
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)&#13;
+at android.test.ActivityInstrumentationTestCase2.runTest(ActivityInstrumentationTestCase2.java:192)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)&#13;
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)&#13;
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:554)&#13;
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1729)&#13;
+
+</failure>
+      </testcase>
+      <testcase name="testReconocerveintepd_90 " classname="inti.recon.test.ReconocerValidacion" time="10.913"/>
+    </testsuite>
+  </testsuite>
+</testrun>

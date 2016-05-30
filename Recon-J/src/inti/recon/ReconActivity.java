@@ -35,10 +35,17 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+@SuppressLint("ClickableViewAccessibility")
 public class ReconActivity extends Activity implements CvCameraViewListener2, OnTouchListener {
     private static final String TAG = "OCVSample::Activity";
     public static final int Ancho = 800;
     public static final int Alto = 600;
+
+    static {
+        if (!OpenCVLoader.initDebug()) {
+            // Handle initialization error
+        }
+    }
     
     private ReconView mOpenCvCameraView;
     private List<Size> mResolutionList;
@@ -77,25 +84,25 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     
     TextToSpeech t1;
     	
-    @SuppressLint("ClickableViewAccessibility") private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
-        @Override
-        public void onManagerConnected(int status) {
-            switch (status) {
-                case LoaderCallbackInterface.SUCCESS:
-                {
-                    Log.i(TAG, "OpenCV loaded successfully");
-                    mOpenCvCameraView.enableView();
-                    mOpenCvCameraView.setOnTouchListener(ReconActivity.this);
-                    billetes=new ArrayList<Billete>();
-                    llenar_lista_billetes();
-                           
-                } break;
-                default:
-                {
-                    super.onManagerConnected(status);
-                } break;
-            }
-        }
+//    @SuppressLint("ClickableViewAccessibility") private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+//        @Override
+//        public void onManagerConnected(int status) {
+//            switch (status) {
+//                case LoaderCallbackInterface.SUCCESS:
+//                {
+//                    Log.i(TAG, "OpenCV loaded successfully");
+//                    mOpenCvCameraView.enableView();
+//                    mOpenCvCameraView.setOnTouchListener(ReconActivity.this);
+//                    billetes=new ArrayList<Billete>();
+//                    llenar_lista_billetes();
+//                           
+//                } break;
+//                default:
+//                {
+//                    super.onManagerConnected(status);
+//                } break;
+//            }
+//        }
 
 		private void llenar_lista_billetes() {
 			for (int i=0;i<ID_Templates.length;i=i+2){
@@ -112,7 +119,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 	            }
 			}
 		}
-    };
+//    };
 
     public ReconActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -127,11 +134,16 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 
         setContentView(R.layout.tutorial3_surface_view);
 
+        billetes=new ArrayList<Billete>();
+        llenar_lista_billetes();
+        
         mOpenCvCameraView = (ReconView) findViewById(R.id.tutorial3_activity_java_surface_view);
 
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
 
         mOpenCvCameraView.setCvCameraViewListener(this);
+        mOpenCvCameraView.setOnTouchListener(ReconActivity.this);
+        mOpenCvCameraView.enableView();
         
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -163,7 +175,11 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     public void onResume()
     {
         super.onResume();
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);
+        billetes=new ArrayList<Billete>();
+        llenar_lista_billetes();
+        mOpenCvCameraView.enableView();
+        //mOpenCvCameraView.setOnTouchListener(ReconActivity.this);
+        //OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);
     }
 
     public void onDestroy() {

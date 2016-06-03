@@ -10,10 +10,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 
-import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
-import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
@@ -40,6 +38,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     private static final String TAG = "OCVSample::Activity";
     public static final int Ancho = 800;
     public static final int Alto = 600;
+    public boolean bienvenida=true;
 
     static {
         if (!OpenCVLoader.initDebug()) {
@@ -118,6 +117,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 	                e.printStackTrace();
 	            }
 			}
+			
 		}
 //    };
 
@@ -178,6 +178,16 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         billetes=new ArrayList<Billete>();
         llenar_lista_billetes();
         mOpenCvCameraView.enableView();
+        t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+               if(status != TextToSpeech.ERROR) {
+            	   Locale locSpanish = new Locale("spa", "ESP");
+            	   t1.setLanguage(locSpanish);
+               }
+            }
+         });
+        
         //mOpenCvCameraView.setOnTouchListener(ReconActivity.this);
         //OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);
     }
@@ -190,15 +200,20 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     }
 
     public void onCameraViewStarted(int width, int height) {
-    	t1.speak("Bienvenido a Recon. Toque la pantalla para comenzar el reconocimiento.", TextToSpeech.QUEUE_FLUSH, null);  	
+    	  	
     }
 
     public void onCameraViewStopped() {
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-
+    	
     	Mat rgba=new Mat();
+    	
+    	if(bienvenida){
+    		t1.speak("Bienvenido a Recon. Toque la pantalla para comenzar el reconocimiento.", TextToSpeech.QUEUE_FLUSH, null);
+    		bienvenida=false;
+    	}
     	
     	org.opencv.core.Size dzise=new org.opencv.core.Size(Ancho,Alto);
     	Imgproc.resize(inputFrame.gray(),rgba,dzise);
@@ -270,7 +285,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
                     Integer.valueOf(element.width).toString() + "x" + Integer.valueOf(element.height).toString());
             idx++;
          }
-
+        
         return true;
     }
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -307,7 +322,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     @SuppressLint({ "SimpleDateFormat", "ClickableViewAccessibility" })
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.i(TAG,"onTouch event");
+           	
+    	Log.i(TAG,"onTouch event");
         //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         //String currentDateandTime = sdf.format(new Date());
         //String fileName = Environment.getExternalStorageDirectory().getPath() +

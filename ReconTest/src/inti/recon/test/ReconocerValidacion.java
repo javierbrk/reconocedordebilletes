@@ -32,7 +32,7 @@ public class ReconocerValidacion extends ActivityInstrumentationTestCase2<ReconA
 	    // MyClass is tested
 		ReconActivity mainActivity = getActivity();
 		//Verifico si se cargaron los ocho tipos de billetes como templates
-	    assertEquals(8, mainActivity.getBilletes().size());
+	    assertEquals(10, mainActivity.getBilletes().size());
 	  }
 /*Test cases para dos pesos de frente*/
 	
@@ -2890,5 +2890,494 @@ public void testReconocercienpd_100() {
     // assert statements
     assertEquals("6 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
   }
+
+/*Test case para quinientos pesos de frente*/
+
+public void testReconocerquinientosp_1() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_1), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_2() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_2), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_3() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_3), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_4() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_4), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_5() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_5), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_6() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_6), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_7() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_7), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_8() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_8), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_9() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_9), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_10() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_10), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientosp_11() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(
+				Utils.loadResource(
+					getInstrumentation().getContext(), R.raw.quinientosp_11), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+/*Test case para quinientos pesos de dorso*/
+
+public void testReconocerquinientospd_1() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_1), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_2() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_2), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_3() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_3), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_4() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_4), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_5() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_5), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_6() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_6), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_7() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_7), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_8() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_8), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_9() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_9), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_10() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_10), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
+public void testReconocerquinientospd_11() {
+	
+    // MyClass is tested
+	ReconActivity mainActivity = getActivity();
+	
+    Mat srcRGBA = new Mat(); //RGBA format
+    try {
+		Imgproc.cvtColor(Utils.loadResource(getInstrumentation().getContext(), R.raw.quinientospd_11), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+	} catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+    Mat rgba=new Mat();
+    org.opencv.core.Size dzise=new org.opencv.core.Size(ReconActivity.Ancho,ReconActivity.Alto);
+	Imgproc.resize(srcRGBA,rgba,dzise);
+    mainActivity.Escena_actual=new Billete(getInstrumentation().getContext(), rgba, rgba );
+    
+    // assert statements
+    assertEquals("8 ",bs.search(mainActivity.Escena_actual, mainActivity.getBilletes()));
+  }
+
 
 }

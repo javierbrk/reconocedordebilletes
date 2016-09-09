@@ -36,9 +36,10 @@ import android.widget.Toast;
 @SuppressLint("ClickableViewAccessibility")
 public class ReconActivity extends Activity implements CvCameraViewListener2, OnTouchListener {
     private static final String TAG = "OCVSample::Activity";
-    public static final int Ancho = 800;
-    public static final int Alto = 600;
-    public boolean bienvenida=true;
+    public static final int Ancho = 640;
+    public static final int Alto = 480;
+    public boolean bienvenida=false;
+    public long timestart=0;
 
     static {
         if (!OpenCVLoader.initDebug()) {
@@ -52,6 +53,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     private MenuItem[] mVelocidadMenuItems;
     private SubMenu mColorEffectsMenu;
     private SubMenu mVelocidadMenu;
+    
+    
     
     private MenuItem[] mResolutionMenuItems;
     private SubMenu mResolutionMenu;
@@ -74,8 +77,13 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     		R.raw.cienpd,
     		R.raw.cienevp,
     		R.raw.cienevpd,
+    		R.raw.quinientosp,
+    		R.raw.quinientospd,
     		R.raw.cinconp,
-    		R.raw.cinconpd};
+    		R.raw.cinconpd,
+    		R.raw.dieznp,
+    		R.raw.dieznpd
+    		};
         
     private boolean touched=false;
     private Mat srcRGBA;
@@ -83,44 +91,28 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     
     TextToSpeech t1;
     	
-//    @SuppressLint("ClickableViewAccessibility") private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
-//        @Override
-//        public void onManagerConnected(int status) {
-//            switch (status) {
-//                case LoaderCallbackInterface.SUCCESS:
-//                {
-//                    Log.i(TAG, "OpenCV loaded successfully");
-//                    mOpenCvCameraView.enableView();
-//                    mOpenCvCameraView.setOnTouchListener(ReconActivity.this);
-//                    billetes=new ArrayList<Billete>();
-//                    llenar_lista_billetes();
-//                           
-//                } break;
-//                default:
-//                {
-//                    super.onManagerConnected(status);
-//                } break;
-//            }
-//        }
-
-		private void llenar_lista_billetes() {
-			for (int i=0;i<ID_Templates.length;i=i+2){
-				try {
-	            	srcRGBA = new Mat(); //RGBA format
-                    Imgproc.cvtColor(Utils.loadResource(ReconActivity.this, ID_Templates[i]), srcRGBA, Imgproc.COLOR_BGR2GRAY);
-                    srcRGBA2 = new Mat(); //RGBA format
-                    Imgproc.cvtColor(Utils.loadResource(ReconActivity.this, ID_Templates[i+1]), srcRGBA2, Imgproc.COLOR_BGR2GRAY);
-                    billetes.add(new Billete(ReconActivity.this,srcRGBA,srcRGBA2));
-                    
-	                
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-			}
-			
+	private void llenar_lista_billetes() {
+		for (int i=0;i<ID_Templates.length;i=i+2){
+			try {
+            	srcRGBA = new Mat(); //RGBA format
+                Imgproc.cvtColor(Utils.loadResource(ReconActivity.this, ID_Templates[i]), srcRGBA, Imgproc.COLOR_BGR2GRAY);
+                srcRGBA2 = new Mat(); //RGBA format
+                Imgproc.cvtColor(Utils.loadResource(ReconActivity.this, ID_Templates[i+1]), srcRGBA2, Imgproc.COLOR_BGR2GRAY);
+                billetes.add(new Billete(ReconActivity.this,srcRGBA,srcRGBA2));
+                
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 		}
-//    };
+		
+	}
 
+
+	
+	
+	
+	
     public ReconActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
@@ -145,6 +137,7 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         mOpenCvCameraView.setOnTouchListener(ReconActivity.this);
         mOpenCvCameraView.enableView();
         
+        
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -155,8 +148,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
             }
          });
         
-    	
-       
+        
+        
     }
 
     @Override
@@ -188,6 +181,10 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
             }
          });
         
+        //Prendo flash
+        
+        
+        
         //mOpenCvCameraView.setOnTouchListener(ReconActivity.this);
         //OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this, mLoaderCallback);
     }
@@ -200,10 +197,12 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     }
 
     public void onCameraViewStarted(int width, int height) {
-    	  	
+    	mOpenCvCameraView.turnLightOn();
+    	
     }
 
     public void onCameraViewStopped() {
+    	mOpenCvCameraView.turnLightOff();
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
@@ -217,14 +216,17 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     	
     	org.opencv.core.Size dzise=new org.opencv.core.Size(Ancho,Alto);
     	Imgproc.resize(inputFrame.gray(),rgba,dzise);
-         if ( touched ) {
-        	
+        if ( touched ) {
+        	 
+        	 
         	 Escena_actual = new Billete(ReconActivity.this, rgba, rgba );
         	 
         	 BillSearch bs = new SimpleBillSearch();
+        	 long startTime = System.nanoTime();
         	 String toSpeak=texto(bs.search(Escena_actual, billetes));
+        	 timestart=(System.nanoTime() - startTime) / 1000000;
         	 //Toast.makeText(this, toSpeak, Toast.LENGTH_SHORT).show();
-        	 
+        	
         	 t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);        	 
         	 touched = false;
          }
@@ -330,8 +332,9 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         // "/sample_picture_" + currentDateandTime + ".jpg";
         //mOpenCvCameraView.takePicture(fileName);
         t1.speak("Calculando...", TextToSpeech.QUEUE_FLUSH, null);
-        //Toast.makeText(this, "Calculando...", Toast.LENGTH_SHORT).show();
-        
+        Toast.makeText(this, timestart + " ms", Toast.LENGTH_SHORT).show();
+                   
+       
         touched = true;
         return false;
     }
@@ -343,11 +346,10 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     	if(in.equalsIgnoreCase("0 ")){
     		out ="Dos pesos.";
     	}
-    	else if(in.equalsIgnoreCase("1 ")|| in.equalsIgnoreCase("8 ")){
+    	else if(in.equalsIgnoreCase("1 ")|| in.equalsIgnoreCase("9 ")){
     		out ="Cinco pesos.";
     	}
-  
-      	else if(in.equalsIgnoreCase("2 ")){
+       	else if(in.equalsIgnoreCase("2 ")|| in.equalsIgnoreCase("10 ")){
     		out ="Diez pesos.";
     	}
       	else if(in.equalsIgnoreCase("3 ")){
@@ -359,12 +361,13 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
       	else if(in.equalsIgnoreCase("6 ") || in.equalsIgnoreCase("7 ")){
     		out ="Cien pesos.";
     	}
-      	
+      	else if(in.equalsIgnoreCase("8 ")){
+    		out ="Quinientos pesos.";
+    	}      	
       	else{
-    		out ="Lo siento no he encontrado ningún billete. Intente nuevamente.";
+    		out ="Intente nuevamente.";
     	}
-  
-    	return out;
+      	return out;
     }
     
 }

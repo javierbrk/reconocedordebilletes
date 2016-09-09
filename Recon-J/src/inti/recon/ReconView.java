@@ -7,6 +7,7 @@ import org.opencv.android.JavaCameraView;
 
 import android.content.Context;
 import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.Size;
 import android.util.AttributeSet;
@@ -54,6 +55,53 @@ public class ReconView extends JavaCameraView implements PictureCallback {
         return mCamera.getParameters().getPreviewSize();
     }
     
+    public void turnLightOn() {
+        if (mCamera == null) {
+          return;
+        }
+        Parameters parameters = mCamera.getParameters();
+        if (parameters == null) {
+          return;
+        }
+        List<String> flashModes = parameters.getSupportedFlashModes();
+        // Check if camera flash exists
+        if (flashModes == null) {
+          // Use the screen as a flashlight (next best thing)
+          return;
+        }
+        String flashMode = parameters.getFlashMode();
+        if (!Parameters.FLASH_MODE_TORCH.equals(flashMode)) {
+          // Turn on the flash
+          if (flashModes.contains(Parameters.FLASH_MODE_TORCH)) {
+            parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+            mCamera.setParameters(parameters);
+          }
+        }
+      }
+
+      public void turnLightOff() {
+          if (mCamera == null) {
+            return;
+          }
+          Parameters parameters = mCamera.getParameters();
+          if (parameters == null) {
+            return;
+          }
+          List<String> flashModes = parameters.getSupportedFlashModes();
+          String flashMode = parameters.getFlashMode();
+          // Check if camera flash exists
+          if (flashModes == null) {
+            return;
+          }
+          if (!Parameters.FLASH_MODE_OFF.equals(flashMode)) {
+            // Turn off the flash
+            if (flashModes.contains(Parameters.FLASH_MODE_OFF)) {
+              parameters.setFlashMode(Parameters.FLASH_MODE_OFF);
+              mCamera.setParameters(parameters);
+            } 
+          }
+      }
+      
    
 
     public void takePicture(final String fileName) {

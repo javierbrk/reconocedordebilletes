@@ -1,23 +1,23 @@
 # reconocedordebilletes
-Reconocedor de denominación de billetes para personas en situacion de discapaciad visual.
-
-
+Reconocedor de denominación de billetes para personas en situacion de discapaciad visual. Concretamente un lector de billetes para ciegos.
 
 Creemos importante que este proyecto sea un proyecto de código abierto y disponible para todos, es por ello que nos interesa de sobremanera que se puedan sumar todos los que quieran participar.
  
 Actualmente contamos con un prototipo funcionando en PC (Ubuntu) y en dispositivos moviles (android 4.0.3)
 http://44jaiio.sadio.org.ar/sites/default/files/sts252-263.pdf
 
-De acuerdo a las pruebas realizadas con billetes para ciertos billetes funciona muy bien pero para otros no tanto ($2 reverso).
+De acuerdo a las pruebas realizadas con billetes para ciertos billetes funciona muy bien pero para otros no tanto ($2 reverso en mal estado).
 
 De acuerdo a las ultimas pruebas hemos notado que es necesario que cada dispositivo realice una calibración previa. El principal factor que afecta a la deteccion es la resolucion de la camara, por ahora es importante configurar la camara a una resolucion de 800*600.
 
 Dado que el prototipo funciona podemos afirmar que la metodología utilizada es correcta. Pero dada la complejidad de la misma será necesario realizar ajustes finos que involucran pruebas exhaustivas y documentadas de laboratorio.
 
+Ya contamos con un banco de pruebas para los diferentes para diferentes billetes.
+
+
 Los pasos a seguir son:
 ======================
 
-     Armado de un banco de pruebas para los diferentes dispositivos, para diferentes billetes.
      Realizar pruebas con diferentes configuraciones del algoritmo de detección para encontrar el mejor.
      Realizar mejoras de rendimiento para hacer que funcione mas rápido en dispositivos de alta gama.
      Pruebas con sujetos en condiciones de laboratorio.

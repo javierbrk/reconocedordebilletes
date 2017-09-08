@@ -23,6 +23,13 @@ Los pasos a seguir son:
      Pruebas con sujetos en condiciones de laboratorio.
      Pruebas con sujetos en condiciones reales.
 
+Informacion para desarrolladores
+================================
+
+En la Wiki del proyecto encontraran toda la informacion necesaria para compilar y ejecutar la aplicación
+
+https://github.com/javierbrk/reconocedordebilletes/wiki
+
 
 ##Publicaciones
 Se realizarán publicaciones de tipo técnicas con el fin de recibir realimentación y sugerencias sobre la metodología utilizada

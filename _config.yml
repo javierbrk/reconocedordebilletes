@@ -1,0 +1,8 @@
+title: Reconocedordebilletes
+description: "Reconocedor de denominación de billetes "
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-tactile
+
+gems:
+  - jekyll-mentions

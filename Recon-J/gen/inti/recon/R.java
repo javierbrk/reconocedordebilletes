@@ -61,12 +61,16 @@ containing a value of this type.
         public static final int cincuentamalpd=0x7f040009;
         public static final int cincuentap=0x7f04000a;
         public static final int cincuentapd=0x7f04000b;
-        public static final int diezp=0x7f04000c;
-        public static final int diezpd=0x7f04000d;
-        public static final int dosp=0x7f04000e;
-        public static final int dospd=0x7f04000f;
-        public static final int veintep=0x7f040010;
-        public static final int veintepd=0x7f040011;
+        public static final int dieznp=0x7f04000c;
+        public static final int dieznpd=0x7f04000d;
+        public static final int diezp=0x7f04000e;
+        public static final int diezpd=0x7f04000f;
+        public static final int dosp=0x7f040010;
+        public static final int dospd=0x7f040011;
+        public static final int quinientosp=0x7f040012;
+        public static final int quinientospd=0x7f040013;
+        public static final int veintep=0x7f040014;
+        public static final int veintepd=0x7f040015;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

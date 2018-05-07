@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Recon-J.iml" filepath="$PROJECT_DIR$/Recon-J.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openCVLibrary24135/openCVLibrary24135.iml" filepath="$PROJECT_DIR$/openCVLibrary24135/openCVLibrary24135.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openCVLibrary341/openCVLibrary341.iml" filepath="$PROJECT_DIR$/openCVLibrary341/openCVLibrary341.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recon/recon.iml" filepath="$PROJECT_DIR$/recon/recon.iml" />
+    </modules>
+  </component>
+</project>

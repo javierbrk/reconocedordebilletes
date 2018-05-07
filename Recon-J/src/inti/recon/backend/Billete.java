@@ -4,7 +4,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfKeyPoint;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.FeatureDetector;
-
+import org.opencv.imgproc.Imgproc;
 
 import android.content.Context;
 
@@ -21,7 +21,11 @@ public class Billete {
 	public Billete(Context context,Mat f,Mat d){
 		DescriptorExtractor descriptor = DescriptorExtractor.create(DescriptorExtractor.ORB);
 		FeatureDetector detector = FeatureDetector.create(FeatureDetector.ORB);
+		//Preprocesamiento de imagenes
 		
+		Imgproc.medianBlur(f, f, 3);
+		Imgproc.medianBlur(d, d, 3);
+				
 		frente=f.clone();
 		dorso=d.clone();
 			

@@ -6,6 +6,7 @@ import inti.recon.backend.SimpleBillSearch;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
@@ -17,11 +18,17 @@ import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.hardware.Camera.Size;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +43,7 @@ import android.widget.Toast;
 @SuppressLint("ClickableViewAccessibility")
 public class ReconActivity extends Activity implements CvCameraViewListener2, OnTouchListener {
     private static final String TAG = "OCVSample::Activity";
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 101;
     public static final int Ancho = 640;
     public static final int Alto = 480;
     public boolean bienvenida=false;
@@ -108,11 +116,47 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
 		
 	}
 
+	private void verificarPermisosDeCamara(){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            //Check if permission is already granted
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // Give first an explanation, if needed.
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.CAMERA)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.CAMERA},
+                            CAMERA_PERMISSION_REQUEST_CODE);
+                } else {
+                    // No explanation needed, we can request the permission.
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.CAMERA},
+                            CAMERA_PERMISSION_REQUEST_CODE);
+                }
+            }
+        }
+    }
 
-	
-	
-	
-	
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (permissions[0].equals(Manifest.permission.CAMERA)
+                    && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    this.finishAndRemoveTask();
+                } else {
+                    this.finishAffinity();
+                }
+            }
+            //Log.d("ReconAct","permissions: " + Arrays.asList(permissions));
+        }
+    }
+
     public ReconActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
@@ -123,6 +167,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
         Log.i(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        verificarPermisosDeCamara();
 
         setContentView(R.layout.tutorial3_surface_view);
 
@@ -168,6 +214,8 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     public void onResume()
     {
         super.onResume();
+        verificarPermisosDeCamara();
+        
         billetes=new ArrayList<Billete>();
         llenar_lista_billetes();
         mOpenCvCameraView.enableView();

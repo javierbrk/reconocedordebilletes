@@ -82,7 +82,11 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     		R.raw.cinconp,
     		R.raw.cinconpd,
     		R.raw.dieznp,
-    		R.raw.dieznpd
+    		R.raw.dieznpd,
+    		R.raw.doscientosp,
+    		R.raw.doscientospd,
+    		R.raw.milp,
+    		R.raw.milpd
     		};
         
     private boolean touched=false;
@@ -363,7 +367,13 @@ public class ReconActivity extends Activity implements CvCameraViewListener2, On
     	}
       	else if(in.equalsIgnoreCase("8 ")){
     		out ="Quinientos pesos.";
-    	}      	
+    	}
+    	else if(in.equalsIgnoreCase("11 ")){
+    		out ="Doscientos pesos.";
+    	}
+    	else if(in.equalsIgnoreCase("12 ")){
+    		out ="Mil pesos.";
+    	}
       	else{
     		out ="Intente nuevamente.";
     	}

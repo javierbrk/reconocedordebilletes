@@ -32,7 +32,7 @@ public class ReconocerValidacion extends
 		// MyClass is tested
 		ReconActivity mainActivity = getActivity();
 		// Verifico si se cargaron los ocho tipos de billetes como templates
-		assertEquals(10, mainActivity.getBilletes().size());
+		assertEquals(11, mainActivity.getBilletes().size());
 	}
 
 	/* Test cases para dos pesos de frente */

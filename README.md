@@ -1,4 +1,4 @@
-# reconocedordebilletes
+﻿# reconocedordebilletes
 Reconocedor de denominación de billetes para personas en situacion de discapaciad visual. Concretamente un lector de billetes para ciegos.
 
 Creemos importante que este proyecto sea un proyecto de código abierto y disponible para todos, es por ello que nos interesa de sobremanera que se puedan sumar todos los que quieran participar.
@@ -46,3 +46,4 @@ Carlos Miguel Correia da Costa, (2014) "Multiview banknote recognition with comp
 Ilya Toytman Jonathan Thambidurai, "Banknote recognition on Android platform" https://stacks.stanford.edu/file/druid:my512gb2187/Toytman_Thambidurai_Coin_counting_with_Android.pdf
 
 Euro money bill recognition vgg.fiit.stuba.sk/wordpress/2013-07/euro-money-bill-recognition/
+--------------------------------

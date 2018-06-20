@@ -10,12 +10,12 @@ import android.content.Context;
 
 public class Billete {
 
-	Mat frente;
-	Mat dorso;
-	MatOfKeyPoint keypointsf=new MatOfKeyPoint();
-	MatOfKeyPoint keypointsd = new MatOfKeyPoint();
-	Mat descriptorsf = new Mat();
-	Mat descriptorsd = new Mat();
+	private Mat frente;
+	private Mat dorso;
+	private MatOfKeyPoint keypointsf=new MatOfKeyPoint();
+	private MatOfKeyPoint keypointsd = new MatOfKeyPoint();
+	private Mat descriptorsf = new Mat();
+	private Mat descriptorsd = new Mat();
 	
 	
 	public Billete(Context context,Mat f,Mat d){

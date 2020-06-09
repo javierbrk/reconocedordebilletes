@@ -1,41 +1,25 @@
-# reconocedordebilletes
-Reconocedor de denominación de billetes para personas en situacion de discapaciad visual. Concretamente un lector de billetes para ciegos.
+# Proyecto Reconocedor de Billetes
+Este proyecto de software libre consiste en un lector de billetes para personas con discapacidad visual.
 
-Creemos importante que este proyecto sea un proyecto de código abierto y disponible para todos, es por ello que nos interesa de sobremanera que se puedan sumar todos los que quieran participar.
- 
+Su objetivo principal es desarrollar una aplicación para dispositivos móviles capaz de reconocer billetes argentinos y comunicar los resultados por medios auditivos.
+
 Actualmente contamos con un prototipo funcionando en PC (Ubuntu) y en dispositivos moviles (android 4.0.3)
 http://44jaiio.sadio.org.ar/sites/default/files/sts252-263.pdf
 
-De acuerdo a las pruebas realizadas con billetes para ciertos billetes funciona muy bien pero para otros no tanto ($2 reverso en mal estado).
+## Ingreso a la comunidad
 
-De acuerdo a las ultimas pruebas hemos notado que es necesario que cada dispositivo realice una calibración previa. El principal factor que afecta a la deteccion es la resolucion de la camara, por ahora es importante configurar la camara a una resolucion de 800*600.
+Con el objetivo de impulsar el desarrollo de aplicaciones de software libres y colaborativas, cualquier persona interesada puede participar en la comunidad.
 
-Dado que el prototipo funciona podemos afirmar que la metodología utilizada es correcta. Pero dada la complejidad de la misma será necesario realizar ajustes finos que involucran pruebas exhaustivas y documentadas de laboratorio.
+Para esto, deben enviar un mail al responsable del proyecto (javierbrk@gmail.com) e indicar los siguientes items:
 
-Ya contamos con un banco de pruebas para los diferentes para diferentes billetes.
+* Cómo encontró la comunidad y porqué decidió participar.
+* Cómo le gustaría aportar dentro del proyecto.
+* Si posee conocimientos en herramientas de desarrollo, indique cuales.
+* Breve descripción de la persona.
 
-
-Los pasos a seguir son:
-======================
-
-     Realizar pruebas con diferentes configuraciones del algoritmo de detección para encontrar el mejor.
-     Realizar mejoras de rendimiento para hacer que funcione mas rápido en dispositivos de alta gama.
-     Pruebas con sujetos en condiciones de laboratorio.
-     Pruebas con sujetos en condiciones reales.
-
-Informacion para desarrolladores
-================================
-
-En la Wiki del proyecto encontraran toda la informacion necesaria para compilar y ejecutar la aplicación
+**Por favor, revisa nuestra wiki para encontrar toda la informacion necesaria para testers, desarrolladores y usuarios.**
 
 https://github.com/javierbrk/reconocedordebilletes/wiki
-
-
-##Publicaciones
-Se realizarán publicaciones de tipo técnicas con el fin de recibir realimentación y sugerencias sobre la metodología utilizada
-https://www.inti.gob.ar/tecnointi/pdf/TecnoINTI2015.pdf pg 396#
-
-De acuerdo a lo discutido y expresado en múltiples oportunidades no se realizaran publicaciones de tipo difusión/divulgación hasta no contar con pruebas reales de personas con problemas de visión.
 
 ##Referencias
 

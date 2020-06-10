@@ -1,5 +1,5 @@
 # Proyecto Reconocedor de Billetes
-Este proyecto de software libre consiste en un lector de billetes para personas con discapacidad visual.
+Este proyecto de software libre consiste en un lector de billetes para personas en situación de discapacidad visual.
 
 Su objetivo principal es desarrollar una aplicación para dispositivos móviles capaz de reconocer billetes argentinos y comunicar los resultados por medios auditivos.
 
@@ -21,7 +21,7 @@ Para esto, deben enviar un mail al responsable del proyecto (javierbrk@gmail.com
 
 https://github.com/javierbrk/reconocedordebilletes/wiki
 
-##Referencias
+## Referencias
 
 Procesamiento de imagenes en general http://szeliski.org/Book/drafts/SzeliskiBook_20100903_draft.pdf
 

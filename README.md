@@ -23,6 +23,7 @@ https://github.com/javierbrk/reconocedordebilletes/wiki
 
 ## Referencias
 
+
 Procesamiento de imagenes en general http://szeliski.org/Book/drafts/SzeliskiBook_20100903_draft.pdf
 
 Carlos Miguel Correia da Costa, (2014) "Multiview banknote recognition with component and shape analysis" http://www.kjer.in/archives/vol2/issue1/61.%20Currency%20Recognition%20in%20Mobile%20Application%20for%20Visually%20Challenged.pdf

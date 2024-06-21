@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project( Recon )
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+add_executable( Recon Recon.cpp )
+target_link_libraries( Recon ${OpenCV_LIBS} )

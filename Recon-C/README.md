@@ -1,32 +1,6 @@
 # ReconC
 
-## Configurar tu repo
-
-
-```
-$ git clone https://gitlab.keylabcloud.com/keylab/machinelearning/ReconC.git
-
-```
-## Modificaciones por medio de merge request
-
-Si queremos hacer alguna modificacion correccion de bug o un fix o un feacture seguimos 
-los siguientes pasos: 
-
-Actualizamos a la ultima version del main creamos un branch nuevo hacemos los cambios 
-y seguimos el ciclo  add -> commit -> push -> merge request 
-
-```
-$ git pull
-$ git checkout -b fix-N main
-$ git add .
-$ git commit -m "Mensaje"
-$ git push --set-upstream origin fix-N
-
-```
-y podemos realizar el pedido del merge request desde la web o el link que nos da git 
-
-
-## Intalación de OPENCV LIB en Linux
+## Intalación de OPENCV LIB en Linux version 4.8.0
 
 En Otra carpeta que no se la del repo de ReconC por ejemplo en ~ 
 
@@ -35,6 +9,12 @@ $ cd ~
 $ sudo apt install -y g++ cmake make git libgtk2.0-dev pkg-config
 $ git clone https://github.com/opencv/opencv.git
 $ git clone https://github.com/opencv/opencv_contrib.git
+$ cd opencv
+$ git checkout tags/4.8.0
+$ cd ..
+$ cd opencv_contrib
+$ git checkout tags/4.8.0
+$ cd ..
 $ mkdir -p build && cd build
 $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     		-D CMAKE_INSTALL_PREFIX=/usr/local \
@@ -61,6 +41,8 @@ $ echo "quinientos pesos argentinos." | festival --language spanish --tts
 ```
 
 ## Compilación y Ejecución de Recon 
+
+Ahora si en la Carpeta Recon-C del Repo del reconocedor de billetes
 
 ```
 $ cd src

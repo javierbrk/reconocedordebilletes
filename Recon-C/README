@@ -1,8 +1,0 @@
-1- INSTALL OPENCV LIB
-	sudo add-apt-repository --yes ppa:xqms/opencv-nonfree
-	sudo apt-get update
-	sudo apt-get install build-essential libpthread-stubs0-dev 
-	sudo apt-get install libopencv-dev libopencv-core-dev libopencv-features2d-dev libopencv-features2d-dev libopencv-features2d-dev libopencv-features2d-dev
-2- CD SRC 
-3- make DisplayVideoWebcam
-4- ./DisplayVideoWebcam
